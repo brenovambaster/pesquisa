@@ -2,11 +2,19 @@ import cv2
 import numpy as np
 
 class SCD:
+    """
+    Scalable Color Descriptor (SCD)
+    """
     def __init__(self, num_blocks=8, num_bins=32):
         self.num_blocks = num_blocks
         self.num_bins = num_bins
 
     def extract_features(self, image):
+        """
+        Extracts the SCD features from an image.
+        :param image:
+        :return: features:  Vector of features
+        """
         # Convert the image to the HSV color space
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         height, width, _ = hsv_image.shape
@@ -52,13 +60,15 @@ class SCD:
         """
         return np.linalg.norm(np.array(features1) - np.array(features2))
 
-
-# Example of usage
-image1 = cv2.imread('images/buraco1.jpg')
-image2 = cv2.imread('images/buraco2.jpg')
-
-scd = SCD()
-features1 = scd.extract_features(image1)
-features2 = scd.extract_features(image2)
-
-print (f"Distance scd: ",scd.distance(features1, features2))
+    def run (self, image1, image2):
+        """
+        Runs the SCD algorithm.
+        :param image1:
+        :param image2:
+        """
+        features1 = self.extract_features(image1)
+        features2 = self.extract_features(image2)
+        distance = self.distance(features1, features2)
+        print("SCD Distance: ", distance)
+        print("SCD Similarity: ", 1 / (1 + distance))
+        print("---------------------------------------")
