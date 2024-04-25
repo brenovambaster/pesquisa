@@ -29,6 +29,9 @@ To install this project, follow these steps:
 * Numpy  1.26.4
 * pip 24.0
 
+## DATA-SETS
+https://www.kaggle.com/datasets/sachinpatel21/pothole-image-dataset?resource=download
+https://datasetninja.com/cracks-and-potholes-in-road
 
 ## License
 
