@@ -10,16 +10,18 @@ Extratores implementados para extração de características de imagens:
 - [x] **Color Structure Descriptor (CSD)**
 - [x] **Color Layout Descriptor (CLD)**
 - [x] **Homogeneous Texture Descriptor**
-- [ ] **Scalable Color Descriptor (SCD)**
+- [x] **Scalable Color Descriptor (SCD)**
 - [ ] **Dominant Color Descriptor (DCD)** 
- 
+
+It's recommended to use IntelliJ IDEA to run the project, but you can use any IDE that supports Python.
+
 ## Installation
 
 To install this project, follow these steps:
 
 1. Clone the repository.
 2. Run the setup script.
-3. Install the required dependencies.
+3. Install the required dependencies. `pip install -r requirements.txt`
 
 ## Dependencies
 * Phython 3.11.0b4
