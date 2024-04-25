@@ -11,7 +11,7 @@ Extratores implementados para extração de características de imagens:
 - [x] **Color Layout Descriptor (CLD)**
 - [x] **Homogeneous Texture Descriptor**
 - [x] **Scalable Color Descriptor (SCD)**
-- [ ] **Dominant Color Descriptor (DCD)** 
+- [x] **Dominant Color Descriptor (DCD)** 
 
 It's recommended to use IntelliJ IDEA to run the project, but you can use any IDE that supports Python.
 
