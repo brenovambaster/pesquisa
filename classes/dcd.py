@@ -1,11 +1,22 @@
 import cv2
 import numpy as np
 
+
 class DCD:
+    """
+    Dominant Color Descriptor (DCD)
+    """
+
     def __init__(self, num_blocks=4):
         self.num_blocks = num_blocks
 
     def extract_features(self, image):
+        """
+        Extracts the Dominant Color Descriptor (DCD) features from an image.
+        :param image:
+        :return: features (list): The DCD features of the image.
+        """
+
         # Convert the image to the HSV color space
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         height, width, _ = hsv_image.shape
@@ -31,6 +42,12 @@ class DCD:
         return features
 
     def calculate_dominant_color(self, block):
+        """
+        Calculates the dominant color of a block in the HSV color space.
+        :param block: The block from which to calculate the dominant color.
+        :return: [dominant_hue, mean_saturation, mean_value]
+        """
+
         # Reshape the block to a 1D array
         reshaped_block = block.reshape(-1, block.shape[-1])
 
@@ -49,18 +66,25 @@ class DCD:
 
         return [dominant_hue, mean_saturation, mean_value]
 
-    def calculate_distance(self, features1, features2):
-        # Calculate the Euclidean distance between the feature vectors
+    def distance(self, features1, features2):
+        """
+        Calculate the Euclidean distance between the feature vectors of two images.
+        :param features1: Vector of features of the first image.
+        :param features2: Vector of features of the second image.
+        :return: 
+        """
         distance = np.linalg.norm(np.array(features1) - np.array(features2))
         return distance
 
-
-# Example of usage
-image1 = cv2.imread('images/buraco1.jpg')
-image2 = cv2.imread('images/buraco2.jpg')
-
-dcd = DCD()
-features1 = dcd.extract_features(image1)
-features2 = dcd.extract_features(image2)
-
-print(f"Distance dcd: ",dcd.calculate_distance(features1, features2))
+    def run(self, image1, image2):
+        """
+        Runs the DCD algorithm.
+        :param image1:
+        :param image2:
+        """
+        features1 = self.extract_features(image1)
+        features2 = self.extract_features(image2)
+        distance = self.distance(features1, features2)
+        print("DCD Distance: ", distance)
+        print("DCD Similarity: ", 1 / (1 + distance))
+        print("---------------------------------------")

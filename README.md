@@ -9,7 +9,7 @@ Extratores implementados para extração de características de imagens:
 
 - [x] **Color Structure Descriptor (CSD)**
 - [x] **Color Layout Descriptor (CLD)**
-- [x] **Homogeneous Texture Descriptor**
+- [x] **Homogeneous Texture Descriptor (HTD)**
 - [x] **Scalable Color Descriptor (SCD)**
 - [x] **Dominant Color Descriptor (DCD)** 
 

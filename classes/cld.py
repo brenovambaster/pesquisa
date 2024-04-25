@@ -3,21 +3,21 @@ import numpy as np
 
 
 class CLD:
-    def __init__(self):
-        pass
+    """
+    Color Layout Descriptor (CLD)
+    """
 
-    def color_layout_descriptor(self, image, num_blocks=8, num_bins=32):
+    def __init__(self, num_blocks=8, num_bins=32):
+        self.num_blocks = num_blocks
+        self.num_bins = num_bins
+
+    def extract_features(self, image):
         """
-        Calculates the Color Layout Descriptor (CLD) for the given image.
-
-        Args:
-            image (numpy.ndarray): The input image.
-            num_blocks (int): The number of blocks to divide the image into.
-            num_bins (int): The number of bins for the hue histogram.
-
-        Returns:
-            numpy.ndarray: The CLD vector representing the image.
+        Extracts the Color Layout Descriptor (CLD) features from an image.
+        :param image:
+        :return cld_vector:
         """
+
         # Converter a imagem para o espaço de cor HSV
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         height, width, _ = hsv_image.shape
@@ -25,17 +25,17 @@ class CLD:
         cld_vector = []
 
         # Dividir a imagem em blocos
-        block_height = height // num_blocks
-        block_width = width // num_blocks
+        block_height = height // self.num_blocks
+        block_width = width // self.num_blocks
 
-        for i in range(num_blocks):
-            for j in range(num_blocks):
+        for i in range(self.num_blocks):
+            for j in range(self.num_blocks):
                 # Obter o bloco atual
                 block = hsv_image[i * block_height:(i + 1) * block_height,
                         j * block_width:(j + 1) * block_width]
 
                 # Calcular o histograma de matiz do bloco
-                hist = cv2.calcHist([block], [0], None, [num_bins], [0, 256])
+                hist = cv2.calcHist([block], [0], None, [self.num_bins], [0, 256])
                 hist = cv2.normalize(hist, hist).flatten()
 
                 # Adicionar o histograma ao vetor CLD
@@ -43,7 +43,7 @@ class CLD:
 
         return np.array(cld_vector)
 
-    def cld_distance(self, cld1, cld2):
+    def distance(self, cld1, cld2):
         """
         Calculates the CLD (Color Layout Descriptor) distance between two CLD vectors.
 
@@ -57,43 +57,15 @@ class CLD:
         return np.linalg.norm(np.array(cld1) - np.array(cld2))  # Euclidean distance
         # return cv2.compareHist(cld1, cld2, cv2.HISTCMP_CHISQR) # Chi-Squared distance
 
-    def compare_images(self, image1, image2):
+    def run(self, image1, image2):
         """
-        Compares two images using the CLD (Color Layout Descriptor) method.
-
-        Args:
-            image1_path (str): The file path of the first image.
-            image2_path (str): The file path of the second image.
-
-        Returns:
-            float: The distance between the two images based on the CLD method.
-                   Returns None if either of the images cannot be read.
+        Run the CLD algorithm on two images.
+        :param image1:
+        :param image2:
         """
-
-        # Se uma das imagens não puder ser lida, retornar None
-        if image1 is None or image2 is None:
-            return None
-
-        NUM_BLOCKS = 8
-        # Extrair os descritores CLD
-        cld1 = self.color_layout_descriptor(image1, NUM_BLOCKS)
-        cld2 = self.color_layout_descriptor(image2, NUM_BLOCKS)
-
-        # Calcular a distância CLD
-        distance = self.cld_distance(cld1, cld2)
-
-        if distance is None:
-            print("Erro ao comparar as imagens.")
-        else:
-            print(f"Distância CLD: {distance}")
-
-        return distance
-
-
-# ---------------- Exemplo de uso ----------------
-# Exemplo de uso
-image1 = cv2.imread('images/buraco1.jpg')
-image2 = cv2.imread('images/buraco2.jpg')
-
-cld = CLD()
-distance = cld.compare_images(image1, image2)
+        cld1 = self.extract_features(image1)
+        cld2 = self.extract_features(image2)
+        distance = self.distance(cld1, cld2)
+        print("CLD Distance: ", distance)
+        print("CLD Similarity: ", 1 / (1 + distance))
+        print("---------------------------------------")
