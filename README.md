@@ -1,7 +1,16 @@
 
-# Project Name
+# Extratores de características
 
-Extatores de características
+<!-- TOC -->
+* [Extratores de características](#extratores-de-características)
+  * [Description](#description)
+  * [Installation](#installation)
+  * [Dependencies](#dependencies)
+  * [DATA-SETS](#data-sets)
+  * [TODO](#todo)
+  * [License](#license)
+  * [Contact](#contact)
+<!-- TOC -->
 
 ## Description
 
@@ -30,8 +39,12 @@ To install this project, follow these steps:
 * pip 24.0
 
 ## DATA-SETS
-https://www.kaggle.com/datasets/sachinpatel21/pothole-image-dataset?resource=download
-https://datasetninja.com/cracks-and-potholes-in-road
+- https://www.kaggle.com/datasets/sachinpatel21/pothole-image-dataset?resource=download
+- https://datasetninja.com/cracks-and-potholes-in-road
+
+## TODO
+- [ ] Fazer a extração para todas a images e gravar em um arquivo (.csv ou não), 
+        depois medir a distância entre cada uma das imagens.
 
 ## License
 
