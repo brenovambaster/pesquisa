@@ -8,3 +8,9 @@ Em reunião do dia 20/05 foi acordado:
   - knn, wide-join, raio de _abrangência (r)_ e quantos _(k)_ devem ser escolhidos
 
 ___
+
+Responsabilidade de cada classe extratora: 
+- Método para extrair características 
+- construtor padrão
+- NÃO TEM responsabilidade de medir distância 
+- NÃO TEM responsabilidade de abrir imagem ou manipular. 
