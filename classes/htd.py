@@ -43,10 +43,10 @@ class HTD:
                 hist_saturation = cv2.calcHist([block], [1], None, [self.num_bins], [0, 256])
                 hist_value = cv2.calcHist([block], [2], None, [self.num_bins], [0, 256])
 
-                # Normalizando os histogramas
-                hist_hue = cv2.normalize(hist_hue, hist_hue).flatten()
-                hist_saturation = cv2.normalize(hist_saturation, hist_saturation).flatten()
-                hist_value = cv2.normalize(hist_value, hist_value).flatten()
+                # # Normalizando os histogramas
+                # hist_hue = cv2.normalize(hist_hue, hist_hue).flatten()
+                # hist_saturation = cv2.normalize(hist_saturation, hist_saturation).flatten()
+                # hist_value = cv2.normalize(hist_value, hist_value).flatten()
 
                 # Concatenando as características do bloco atual
                 features.extend(hist_hue)

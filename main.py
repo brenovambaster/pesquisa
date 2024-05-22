@@ -15,8 +15,8 @@ def main():
     csd_instance = csd.CSD()
 
     # Load the image
-    image1 = cv2.imread("images/1.jpeg")
-    image2 = cv2.imread("images/1-alterada.jpeg")
+    image1 = cv2.imread("images/buraco1.jpg")
+    image2 = cv2.imread("images/buraco2.jpg")
 
 
     # Input algorithm that you want to run
