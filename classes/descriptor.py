@@ -7,13 +7,13 @@ from classes.interfaces.IExtractor import IExtractor
 
 
 class Descriptor:
-    def __init__(self, image, extractor_name, distance_name):
+    def __init__(self, image, extractor_name, distance_name,p2):
         self.extractor = IExtractor
         self.distance = Distance
 
         self.set_extractor(extractor_name)
         self.features = self.extractor.extract_features(image)
-        self.calculate_distance(distance_name, self.features)
+        self.calculate_distance(distance_name, self.features,p2)
 
     def set_extractor(self, extractor_string):
         # TODO: refatorar para usar um dicionário de extratores e instanciar o extrator correto
@@ -31,8 +31,8 @@ class Descriptor:
         else:
             raise ValueError("Invalid extractor")
 
-    def calculate_distance(self, distance_string, features):
+    def calculate_distance(self, distance_string, features,p2):
         # p2 é o vetor de características de um elemento da base de dados a ser comparado
 
-        self.distance = Distance(features, p2=features)
+        self.distance = Distance(features,p2)
         return self.distance.calculate(distance_string)
