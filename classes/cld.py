@@ -1,8 +1,9 @@
 import cv2
 import numpy as np
+from .interfaces.IExtractor import IExtractor
 
 
-class CLD:
+class CLD(IExtractor):
     """
     Color Layout Descriptor (CLD)
     """
@@ -42,30 +43,3 @@ class CLD:
                 cld_vector.extend(hist)
 
         return np.array(cld_vector)
-
-    def distance(self, cld1, cld2):
-        """
-        Calculates the CLD (Color Layout Descriptor) distance between two CLD vectors.
-
-        Parameters:
-        cld1 (array-like): The first CLD vector.
-        cld2 (array-like): The second CLD vector.
-
-        Returns:
-        float: The CLD distance between the two CLD vectors.
-        """
-        return np.linalg.norm(np.array(cld1) - np.array(cld2))  # Euclidean distance
-        # return cv2.compareHist(cld1, cld2, cv2.HISTCMP_CHISQR) # Chi-Squared distance
-
-    def run(self, image1, image2):
-        """
-        Run the CLD algorithm on two images.
-        :param image1:
-        :param image2:
-        """
-        cld1 = self.extract_features(image1)
-        cld2 = self.extract_features(image2)
-        distance = self.distance(cld1, cld2)
-        print("CLD Distance: ", distance)
-        print("CLD Similarity: ", 1 / (1 + distance))
-        print("---------------------------------------")

@@ -55,27 +55,3 @@ class HTD:
 
         return features
 
-    def distance(self, features1, features2):
-        """
-        Calculates the distance between two feature vectors using the Euclidean distance.
-        :param features1:
-        :param features2:
-        :return: distance: The distance between the two feature vectors.
-        """
-
-        distance = np.linalg.norm(np.array(features1) - np.array(features2))
-        return distance
-
-    def run(self, image1, image2):
-        """
-        Runs the HTD algorithm.
-        :param image1:
-        :param image2:
-        """
-        features1 = self.extract_features(image1)
-        features2 = self.extract_features(image2)
-
-        distance = self.distance(features1, features2)
-        print("HTD Distance: ", distance)
-        print("HTD Similarity: ", 1 / (1 + distance))
-        print("---------------------------------------")
