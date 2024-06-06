@@ -18,16 +18,16 @@ class Descriptor:
     def set_extractor(self, extractor_string):
         # TODO: refatorar para usar um dicionário de extratores e instanciar o extrator correto
 
-        if extractor_string == "HTD":
-            self.extractor = htd.HTD()
-        elif extractor_string == "CLD":
-            self.extractor = cld.CLD()
-        elif extractor_string == "CSD":
-            self.extractor = csd.CSD()
-        elif extractor_string == "DCD":
-            self.extractor = dcd.DCD()
-        elif extractor_string == "SCD":
-            self.extractor = scd.SCD()
+        extractors = {
+            "HTD": htd.HTD,
+            "CLD": cld.CLD,
+            "CSD": csd.CSD,
+            "DCD": dcd.DCD,
+            "SCD": scd.SCD
+        }
+
+        if extractor_string in extractors:
+            self.extractor = extractors[extractor_string]()
         else:
             raise ValueError("Invalid extractor")
 
