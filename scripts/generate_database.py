@@ -17,17 +17,19 @@ image_paths = [os.path.join(image_dir, img) for img in os.listdir(image_dir) if
 htd_obj = htd.HTD()
 
 # For each image path, extract features and save them in a file
-id = 0 # id for each image in the database file
+id = 0  # id for each image in the database file
 
 for img_path in image_paths:
     image = cv2.imread(img_path)
+    if image is None:
+        raise ValueError(F"Falha ao carregar a imagem em {img_path}")
+
     features = htd_obj.extract_features(image)
 
     # Save the features in a file
     with open('../output/database.txt', 'a') as f:
         f.write(f'id={id}|features={features}|lat=123.32|long=-12.3231\n')
         f.close()
-
 
     # Map the id to the image name
     with open('../output/id_map.txt', 'a') as f:

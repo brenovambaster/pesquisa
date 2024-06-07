@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-
 class HTD:
     """
     Homogeneous Texture Descriptor (HTD)
@@ -17,11 +16,13 @@ class HTD:
         :param image:
         :return: features: Vector of features
         """
+        if image is None or image.size == 0:
+            raise ValueError("A imagem fornecida está vazia ou inválida")
+
         # Convertendo a imagem para o espaço de cores HSV
         hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
         # Normalizando o histograma para cada canal
-        # TODO: rever se é necessário normalizar o histogramas aqui
         h, s, v = cv2.split(hsv_image)
         h_eq = cv2.equalizeHist(h)
         s_eq = cv2.equalizeHist(s)
