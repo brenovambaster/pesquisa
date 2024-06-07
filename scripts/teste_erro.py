@@ -1,7 +1,11 @@
 import os
 import cv2
 import classes.htd as htd
+"""
+NO SISTEMA LINUX, ALGUMAS  IMAGENS NÃO SÃO LIDAS PELO CV2.IMREAD E GERA UMA EXCEÇÃO. ESTRANHAMENTE, ESSE ERRO NÃO OCORRE
+QUADO É COMPILADO NA PLATAFORMA WINDOWS
 
+"""
 # Função para obter o caminho absoluto
 def get_absolute_path(relative_path):
     return os.path.abspath(relative_path)
