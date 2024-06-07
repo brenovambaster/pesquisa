@@ -1,6 +1,6 @@
 # refat-2 O QUE VAI MUDAR ?
 
-Em reunião do dia 20/05 foi acordado: 
+# Reunião 20/05  
 
 - [x] retirar a função de distância de cada classe e criar um nova classe para distâncias
 - [x] criar classe  `Descritor` => Link ou agregado de extrator com distância
@@ -17,7 +17,7 @@ Responsabilidade de cada classe extratora:
 
 ___ 
 # Reunião 31/05
-- Tirar dúvida com o professor a respeito do fluxo de execução do programa e da arquitetura.Possível diagrama de sequência.
+- Tirar dúvida com o professor a respeito do fluxo de execução do programa e da arquitetura. Esboçar Possível diagrama de sequência.
 - Criar a base de dados em um arquivo .txt
   - id_image, vetor_de_características, geolocalização
   - Criar uma classe para manipular a base de dados

@@ -6,6 +6,6 @@ image2 = cv2.imread("images/test/15.jpg")
 htd_instance = cld.CLD()
 p2 = htd_instance.extract_features(image2)
 
-descriptor_instance = descriptor.Descriptor(image1, "CSD", "euclidean", p2)
+descriptor_instance = descriptor.Descriptor(image1, "CLD", "euclidean", p2)
 
 print("Distance: ", descriptor_instance.distance.calculated_distance)
