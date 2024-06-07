@@ -1,10 +1,12 @@
 import cv2
 import numpy as np
 
+
 class HTD:
     """
     Homogeneous Texture Descriptor (HTD)
     """
+
     def __init__(self, num_blocks=4, num_bins=8):
         self.num_blocks = num_blocks
         self.num_bins = num_bins
@@ -36,7 +38,7 @@ class HTD:
         for i in range(self.num_blocks):
             for j in range(self.num_blocks):
                 # Obtendo o bloco atual
-                block = hsv_eq_image[i*block_height:(i+1)*block_height, j*block_width:(j+1)*block_width]
+                block = hsv_eq_image[i * block_height:(i + 1) * block_height, j * block_width:(j + 1) * block_width]
 
                 # Calculando o histograma de matiz do bloco
                 hist_hue = cv2.calcHist([block], [0], None, [self.num_bins], [0, 180])
@@ -54,4 +56,3 @@ class HTD:
                 features.extend(hist_value)
 
         return features
-

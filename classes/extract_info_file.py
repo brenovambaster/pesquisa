@@ -1,90 +1,103 @@
-def read_file(file_path):
+class FileProcessor:
     """
-    This function reads a file and returns its lines as a list.
+    A class to process files.
 
-    Parameters:
-    file_path (str): The path to the file to be read.
+    Attributes:
+    file_path : str
+        The path to the file to be processed
 
-    Returns:
-    list: A list of lines in the file.
-
-    Raises:
-    IOError: If the file cannot be opened.
+    Methods:
+    read_file():
+        Reads a file and returns its lines.
+    process_line(line):
+        Processes a line and returns a dictionary.
+    parse_list(value):
+        Parses a string list and returns a list.
+    process_file():
+        Processes a file and returns a list of dictionaries.
     """
-    try:
-        with open(file_path, 'r') as file:
-            lines = file.readlines()
-        return lines
-    except IOError:
-        print(f"Error opening file: {file_path}")
-        return []
 
-def process_line(line):
-    """
-    This function processes a line from the file and returns a dictionary of key-value pairs.
+    def __init__(self, file_path):
+        """
+        Constructs all the necessary attributes for the FileProcessor object.
 
-    Parameters:
-    line (str): The line to be processed.
+        Parameters
+        ----------
+            file_path : str
+                the path to the file to be processed
+        """
+        self.file_path = file_path
 
-    Returns:
-    dict: A dictionary where the keys are the identifiers before the '=' character and the values are the corresponding
-    values after the '=' character.
-    """
-    line_data = {}
-    parts = line.strip().split('|')
+    def read_file(self):
+        """
+        This method reads a file and returns its lines as a list.
 
-    for part in parts:
-        key, value = part.split('=', 1)
-        key = key.strip()
-        value = value.strip()
+        Returns:
+        list: A list of lines in the file.
 
-        if value.startswith('[') and value.endswith(']'):
-            value = parse_list(value)
-        elif '.' in value:
-            value = float(value)
-        else:
-            value = int(value)
+        Raises:
+        IOError: If the file cannot be opened.
+        """
+        try:
+            with open(self.file_path, 'r') as file:
+                lines = file.readlines()
+            return lines
+        except IOError:
+            print(f"Error opening file: {self.file_path}")
+            return []
 
-        line_data[key] = value
+    def process_line(self, line):
+        """
+        This method processes a line from the file and returns a dictionary of key-value pairs.
 
-    return line_data
+        Parameters:
+        line (str): The line to be processed.
 
-def parse_list(value):
-    """
-    This function parses a string representation of a list and returns a list of integers or floats.
+        Returns:
+        dict: A dictionary where the keys are the identifiers before the '=' character and the values are the corresponding
+        values after the '=' character.
+        """
+        line_data = {}
+        parts = line.strip().split('|')
 
-    Parameters:
-    value (str): The string representation of a list.
+        for part in parts:
+            key, value = part.split('=', 1)
+            key = key.strip()
+            value = value.strip()
 
-    Returns:
-    list: A list of integers or floats.
-    """
-    value = value[1:-1].split(',')
-    return [float(v) if '.' in v else int(v) for v in value]
+            if value.startswith('[') and value.endswith(']'):
+                value = self.parse_list(value)
+            elif '.' in value:
+                value = float(value)
+            else:
+                value = int(value)
 
-def process_file(file_path):
-    """
-    This function processes a file and returns a list of dictionaries. Each dictionary represents a line in the file.
+            line_data[key] = value
 
-    Parameters:
-    file_path (str): The path to the file to be processed.
+        return line_data
 
-    Returns:
-    list: A list of dictionaries. Each dictionary represents a line in the file.
-    """
-    lines = read_file(file_path)
-    data = [process_line(line) for line in lines]
-    return data
+    def parse_list(self, value):
+        """
+        This method parses a string representation of a list and returns a list of integers or floats.
 
-# Exemplo de uso
-file_path = '../output/dados.txt'  # Caminho para o arquivo de dados
-dados = process_file(file_path)
+        Parameters:
+        value (str): The string representation of a list.
 
-# Exibir os dados lidos do arquivo
-for dado in dados:
-    print(dado)
-    # Acessar valores individuais, como lat e long
-    lat = dado.get('lat')
-    long = dado.get('long')
-    print(f"Latitude: {lat}, Longitude: {long}")
-    print("--------------------------------------------------------------\n")
+        Returns:
+        list: A list of integers or floats.
+        """
+        value = value[1:-1].split(',')
+        return [float(v) if '.' in v else int(v) for v in value]
+
+    def process_file(self):
+        """
+        This method processes a file and returns a list of dictionaries. Each dictionary represents a line in the file.
+
+        Returns:
+        list: A list of dictionaries. Each dictionary represents a line in the file.
+        """
+        lines = self.read_file()
+        data = [self.process_line(line) for line in lines]
+        return data
+
+

@@ -1,11 +1,12 @@
 import cv2
-from classes import htd, cld, csd, distances, descriptor
+from classes import descriptor
+from classes.extract_info_file import FileProcessor
 
-image1 = cv2.imread("images/test/6.jpg")
-image2 = cv2.imread("images/test/15.jpg")
-htd_instance = cld.CLD()
-p2 = htd_instance.extract_features(image2)
+image1 = cv2.imread("images/6.jpg")
+file_processor = FileProcessor('output/database.txt')
+data = file_processor.process_file()
 
-descriptor_instance = descriptor.Descriptor(image1, "CLD", "euclidean", p2)
-
-print("Distance: ", descriptor_instance.distance.calculated_distance)
+for i in data:
+    descriptor_instance = descriptor.Descriptor(image1, "HTD", "euclidean", i['features'])
+    print(f"Distance: {descriptor_instance.distance.calculated_distance} para id={i['id']}")
+    #print(i['features'])
