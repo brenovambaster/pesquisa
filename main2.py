@@ -1,6 +1,7 @@
 import cv2
 from classes import descriptor
 from classes.extract_info_file import FileProcessor
+# TODO: SE FOR A PRIMEIRA VEZ EM QUE RODA ESSE SCRIPT, DEVE COMPILAR O ARQUIVO scripts/generate_database.py ANTES DE EXECUTAR ESTE ARQUIVO
 
 image1 = cv2.imread("images/6.jpg")
 file_processor = FileProcessor('output/database.txt')
