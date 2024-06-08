@@ -25,8 +25,14 @@ distances = list(distances.items())[:5]
 
 print(distances)
 
-
-# cv2.imshow('image1', image1)
-# for i in distances:
-#     image = cv2.imread(i[0])
-#     cv2.imshow(i[0], image)
+# Desejo salvar os caminhos das imagens em um vetor para que depois eu possa exibir as imagens uma ao lado da outra
+#
+for i in data:
+    for id, distancia in distances:
+        if i['id'] == id:
+            path= i['path'].replace('.', '', 1)
+            img= cv2.imread(path)
+            img= cv2.resize(img, (500, 500))
+            cv2.imshow('image',img)
+            cv2.waitKey(0)
+            break

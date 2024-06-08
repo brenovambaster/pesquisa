@@ -67,6 +67,8 @@ class FileProcessor:
 
             if value.startswith('[') and value.endswith(']'):
                 value = self.parse_list(value)
+            elif value.startswith('"') and value.endswith('"'):
+                value = value[1:-1]
             elif '.' in value:
                 value = float(value)
             else:

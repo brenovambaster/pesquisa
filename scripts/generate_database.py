@@ -28,7 +28,7 @@ for img_path in image_paths:
 
     # Save the features in a file
     with open('../output/database.txt', 'a') as f:
-        f.write(f'id={id}|features={features}|lat=123.32|long=-12.3231\n')
+        f.write(f'id={id}|features={features}|lat=123.32|long=-12.3231|path="{img_path}"\n')
         f.close()
 
     # Map the id to the image name
