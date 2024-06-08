@@ -12,7 +12,7 @@ def get_absolute_path(relative_path):
 
 
 # Specify the directory containing the images
-image_dir = '../images/299.jpg'
+image_dir = '../images/6.jpg'
 htd_obj = htd.HTD()
 absolute_image_path = get_absolute_path(image_dir)
 
