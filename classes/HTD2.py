@@ -20,7 +20,7 @@ class HTD:
         self.s_bins = s_bins
         self.v_bins = v_bins
 
-    def compute(self, image):
+    def extract_features(self, image):
         """
         Compute the HSV histogram of an image.
 

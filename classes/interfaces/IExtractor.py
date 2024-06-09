@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 
-class  IExtractor(ABC):
+
+class IExtractor(ABC):
     @abstractmethod
     def extract_features(self, image):
         pass

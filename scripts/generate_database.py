@@ -24,7 +24,7 @@ for img_path in image_paths:
     if image is None:
         raise ValueError(F"Falha ao carregar a imagem em {img_path}")
 
-    features = htd_obj.compute(image)
+    features = htd_obj.extract_features(image)
 
     # Save the features in a file
     with open('../output/database.txt', 'a') as f:
