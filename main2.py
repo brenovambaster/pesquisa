@@ -7,11 +7,12 @@ from classes.extract_info_file import FileProcessor
 from classes.HTD2 import HTD
 
 # Read the image
-image1 = ImageReader("base_imgs_testes/69.jpg").read_image()
+image1 = ImageReader("base_imgs_testes/67.jpg").read_image()
 
 # Extract features from the image
-htd_obj = HTD(8, 8, 8)
-feat_1 = htd_obj.extract_features(image1)
+
+htd_obj = Descriptor(image1, 'HTD')
+feat_1 = htd_obj.extractor.extract_features(image1)
 
 # Read the database file and recuperate the tuples
 file_processor = FileProcessor('output/database.txt')
@@ -20,10 +21,18 @@ data = file_processor.process_file()
 # Transform the features of the image to a numpy array float32
 h1 = np.array(feat_1, dtype=np.float32)
 
+"""
+TODO: Compare the features of the image with the features of the all images in the database
+NOTA:  Ajuste provisório para que encontre as imagens próximas, essa busca deve ser de responsabilidade da classe 
+`operador de busca`
+
+Atencao: Em alguns casos,  esse trecho não mostra a imagem mais próxima de fato, mas sim outras imagens que não 
+são tão próximas 
+"""
 distances = {}
 for i in data:
     h2 = np.array(i['features'], dtype=np.float32)
-    distances[i['id']] = htd_obj.compare(h1, h2, cv2.HISTCMP_CORREL)
+    distances[i['id']] = htd_obj.extractor.compare(h1, h2, cv2.HISTCMP_CORREL)
 
 
 # list a 5 mais próximas
