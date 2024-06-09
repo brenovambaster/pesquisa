@@ -8,7 +8,7 @@ from classes.HTD2 import HTD
 image1 = cv2.imread("base_imgs_testes/5.jpg")
 file_processor = FileProcessor('output/database.txt')
 htd_obj = HTD(8, 8, 8)
-feat_1 = htd_obj.compute(image1)
+feat_1 = htd_obj.extract_features(image1)
 
 data = file_processor.process_file()
 

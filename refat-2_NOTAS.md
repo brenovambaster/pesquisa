@@ -22,4 +22,9 @@ ___
   - id_image, vetor_de_características, geolocalização
   - Criar uma classe para manipular a base de dados
   - Criar uma classe para representar uma tupla da base de dados ??? ex objeto {id_image, vetor_de_características, geolocalização} 
-- Gráfico de precisão x revocação (precision x recall) 
+- Gráfico de precisão x revocação (precision x recall)
+
+___ 
+
+# Desing de arquitetura
+![Design de como,até então, está implementado o sistema](arquitetura.png "fluxograma")

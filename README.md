@@ -12,6 +12,12 @@
   * [Contact](#contact)
 <!-- TOC -->
 
+| Anotações       | Arquivo                                 |
+|-----------------|-----------------------------------------|
+| Notas da branch | [o quem sido feito](./refat-2_NOTAS.md) |
+| To-do list      |                                         |
+
+
 ## Description
 
 Extratores implementados para extração de características de imagens:
