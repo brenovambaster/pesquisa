@@ -1,18 +1,25 @@
 import cv2
 import numpy as np
 
-from classes import descriptor
+from classes.descriptor import Descriptor
+from classes.ImageReader import ImageReader
 from classes.extract_info_file import FileProcessor
 from classes.HTD2 import HTD
 
-image1 = cv2.imread("base_imgs_testes/5.jpg")
-file_processor = FileProcessor('output/database.txt')
+# Read the image
+image1 = ImageReader("base_imgs_testes/69.jpg").read_image()
+
+# Extract features from the image
 htd_obj = HTD(8, 8, 8)
 feat_1 = htd_obj.extract_features(image1)
 
+# Read the database file and recuperate the tuples
+file_processor = FileProcessor('output/database.txt')
 data = file_processor.process_file()
 
+# Transform the features of the image to a numpy array float32
 h1 = np.array(feat_1, dtype=np.float32)
+
 distances = {}
 for i in data:
     h2 = np.array(i['features'], dtype=np.float32)
