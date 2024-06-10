@@ -47,21 +47,12 @@ class HTD:
         histogram = np.concatenate((h_hist, s_hist, v_hist))
         return np.array(histogram).tolist()
 
-    def compare(self, hist1, hist2, method=cv2.HISTCMP_CORREL):
+    def compare(self, hist1, hist2):
         """
-        Compare two histograms.
-
-        Parameters
-        ----------
-        hist1, hist2 : array_like
-            Histograms to compare.
-        method : int, optional
-            Comparison method (default is cv2.HISTCMP_CORREL).
-
-        Returns
-        -------
-        float
-            The similarity between the histograms.
+        Compute the similarity between two feature vectors.
+        :param hist1:
+        :param hist2:
+        :return:
         """
         similarity = np.linalg.norm(np.array(hist1) - np.array(hist2))
         return similarity

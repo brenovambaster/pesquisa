@@ -7,10 +7,9 @@ from classes.extract_info_file import FileProcessor
 from classes.HTD2 import HTD
 
 # Read the image
-image1 = ImageReader("base_imgs_testes/67.jpg").read_image()
+image1 = ImageReader("base_imgs_testes/8.jpg").read_image()
 
 # Extract features from the image
-
 htd_obj = Descriptor(image1, 'HTD')
 feat_1 = htd_obj.extractor.extract_features(image1)
 
@@ -29,26 +28,42 @@ NOTA:  Ajuste provisório para que encontre as imagens próximas, essa busca dev
 Atencao: Em alguns casos,  esse trecho não mostra a imagem mais próxima de fato, mas sim outras imagens que não 
 são tão próximas 
 """
-distances = {}
+distances = []
 for i in data:
     h2 = np.array(i['features'], dtype=np.float32)
-    distances[i['id']] = htd_obj.extractor.compare(h1, h2, cv2.HISTCMP_CORREL)
+    distance_info = {
+        'id': i['id'],
+        'distance': float(htd_obj.extractor.compare(h1, h2)),
+        'path_img': i['path']
+    }
+    distances.append(distance_info)
+
+# Sort the distances and return the ids of the most similar images
+distances = sorted(distances, key=lambda item: item['distance'])
+
+# Print the 5 most similar images
+print(distances[:5])
 
 
-# list a 5 mais próximas
-distances = {k: v for k, v in sorted(distances.items(), key=lambda item: item[1])}
-distances = list(distances.items())[:5]
+# Initialize an empty list to store the images
+images = []
 
-print(distances)
+# Loop over the paths of the 5 most similar images
+for i in distances[:5]:
+    path = i['path_img'].replace("../", "")
+    # Read the image
+    image = cv2.imread(path)
+    image = cv2.resize(image, (400, 300))
 
-# Desejo salvar os caminhos das imagens em um vetor para que depois eu possa exibir as imagens uma ao lado da outra
-#
-for i in data:
-    for id, distancia in distances:
-        if i['id'] == id:
-            path= i['path'].replace('.', '', 1)
-            img= cv2.imread(path)
-            img= cv2.resize(img, (500, 500))
-            cv2.imshow('image',img)
-            cv2.waitKey(0)
-            break
+    # Add a 3px padding to the image
+    image = cv2.copyMakeBorder(image, 3, 3, 3, 3, cv2.BORDER_CONSTANT, value=[0, 0, 0])
+
+    # Append the image to the list
+    images.append(image)
+
+# Concatenate the images horizontally
+concatenated_image = np.hstack(images)
+# Display the concatenated image
+cv2.imshow("Images", concatenated_image)
+cv2.waitKey(0)
+
