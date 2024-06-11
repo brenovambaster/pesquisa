@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
 
-
-class CSD:
+class CSD ():
     """
     Color Structure Descriptor (CSD)
     """
@@ -43,27 +42,5 @@ class CSD:
                 csd_vector.extend(hist)
 
         return np.array(csd_vector)
-
-    def distance(self, csd1, csd2):
-        """
-        Calculates the CSD (Color Structure Descriptor) distance between two CSD vectors.
-        :param csd1:
-        :param csd2:
-        :return:
-        """
-        return np.linalg.norm(np.array(csd1) - np.array(csd2))
-
-    def run (self, image1, image2):
-        """
-        Run the CSD  algorithm on two images.
-        :param image1:
-        :param image2:
-        """
-        csd1 = self.color_structure_descriptor(image1)
-        csd2 = self.color_structure_descriptor(image2)
-
-        print("CSD Distance: ", self.distance(csd1, csd2))
-        print("CSD Similarity: ", 1 / (1 + self.distance(csd1, csd2)))
-        print("---------------------------------------")
 
 

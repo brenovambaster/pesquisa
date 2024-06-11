@@ -1,8 +1,6 @@
 import cv2
 import numpy as np
-
-
-class DCD:
+class DCD():
     """
     Dominant Color Descriptor (DCD)
     """
@@ -66,25 +64,3 @@ class DCD:
 
         return [dominant_hue, mean_saturation, mean_value]
 
-    def distance(self, features1, features2):
-        """
-        Calculate the Euclidean distance between the feature vectors of two images.
-        :param features1: Vector of features of the first image.
-        :param features2: Vector of features of the second image.
-        :return: 
-        """
-        distance = np.linalg.norm(np.array(features1) - np.array(features2))
-        return distance
-
-    def run(self, image1, image2):
-        """
-        Runs the DCD algorithm.
-        :param image1:
-        :param image2:
-        """
-        features1 = self.extract_features(image1)
-        features2 = self.extract_features(image2)
-        distance = self.distance(features1, features2)
-        print("DCD Distance: ", distance)
-        print("DCD Similarity: ", 1 / (1 + distance))
-        print("---------------------------------------")

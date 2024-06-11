@@ -46,29 +46,3 @@ class SCD:
                 features.extend(block_features)
 
         return features
-
-    def distance(self, features1, features2):
-        """
-        Calculates the distance between two feature vectors.
-
-        Parameters:
-        features1 (array-like): The first feature vector.
-        features2 (array-like): The second feature vector.
-
-        Returns:
-        float: The distance between the two feature vectors.
-        """
-        return np.linalg.norm(np.array(features1) - np.array(features2))
-
-    def run (self, image1, image2):
-        """
-        Runs the SCD algorithm.
-        :param image1:
-        :param image2:
-        """
-        features1 = self.extract_features(image1)
-        features2 = self.extract_features(image2)
-        distance = self.distance(features1, features2)
-        print("SCD Distance: ", distance)
-        print("SCD Similarity: ", 1 / (1 + distance))
-        print("---------------------------------------")
