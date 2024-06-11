@@ -49,10 +49,11 @@ class HTD:
 
     def compare(self, hist1, hist2):
         """
-        Compute the similarity between two feature vectors.
-        :param hist1:
-        :param hist2:
-        :return:
+        Compute the distance between two feature vectors.
+        :param hist1: np.array
+        :param hist2: np.array
+        :return: distance
+        :rtype: float
         """
-        similarity = np.linalg.norm(np.array(hist1) - np.array(hist2))
-        return similarity
+        distance = np.linalg.norm(np.array(hist1) - np.array(hist2))
+        return distance

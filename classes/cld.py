@@ -85,10 +85,11 @@ class CLD:
 
     def compare(self, feat1, feat2):
         """
-        Compute the similarity between two feature vectors.
+        Compute the distance between two feature vectors.
         :param feat1:
         :param feat2:
-        :return:
+        :return: distance
+        :rtype: float
         """
-        similarity = np.linalg.norm(np.array(feat1) - np.array(feat2))
-        return similarity
+        distance = np.linalg.norm(np.array(feat1) - np.array(feat2))
+        return distance
