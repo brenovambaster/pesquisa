@@ -6,23 +6,29 @@ def rename_images(directory):
     files = os.listdir(directory)
 
     # Filter out all non-image files
-    images = [f for f in files if f.endswith('.jpg') or f.endswith('.png')]
+    image_extensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff']
+    images = [f for f in files if os.path.splitext(f)[1].lower() in image_extensions]
 
     # Sort the images by their current names
     images.sort()
 
-    # Rename each image to a sequential number
+    # Rename each image to a temporary name first to avoid conflicts
+    temp_names = []
     for i, image in enumerate(images, start=1):
-        # Construct the new name for the image
         extension = os.path.splitext(image)[1]
-        new_name = f"{i}{extension}"
-
-        # Construct the full paths for the old and new names
+        temp_name = f"temp_{i}{extension}"
         old_path = os.path.join(directory, image)
-        new_path = os.path.join(directory, new_name)
+        temp_path = os.path.join(directory, temp_name)
+        shutil.move(old_path, temp_path)
+        temp_names.append(temp_name)
 
-        # Rename the image
-        shutil.move(old_path, new_path)
+    # Rename from temporary names to final sequential names
+    for i, temp_name in enumerate(temp_names, start=1):
+        extension = os.path.splitext(temp_name)[1]
+        new_name = f"{i}{extension}"
+        temp_path = os.path.join(directory, temp_name)
+        new_path = os.path.join(directory, new_name)
+        shutil.move(temp_path, new_path)
 
 # Call the function on your directory
 rename_images("../base_imgs_testes/")

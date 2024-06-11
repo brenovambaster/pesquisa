@@ -7,7 +7,8 @@ image_dir = '../base_imgs_testes/'
 
 # Get all the image paths
 """
- TODO: AS IMANGES CARREGADAS  SEGUEM A ORDEM QUE O OS.LISTDIR RETORNA, E não a ordem que o sistema operacional lista os arquivos (crescente)
+ TODO: AS IMANGES CARREGADAS  SEGUEM A ORDEM QUE O OS.LISTDIR RETORNA, E não a ordem que o sistema operacional lista os 
+ arquivos (crescente)
  Faz se necessário mapear o id gerado para o nome da imagem.  
 """
 image_paths = [os.path.join(image_dir, img) for img in os.listdir(image_dir) if
