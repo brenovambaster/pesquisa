@@ -6,7 +6,7 @@ from classes.extract_info_file import FileProcessor
 from classes.HTD2 import HTD
 
 # Read the image
-image1 = ImageReader("base_imgs_testes/298.jpg").read_image()
+image1 = ImageReader("base_imgs_testes/229.jpg").read_image()
 
 # Extract features from the image
 htd_obj = Descriptor(image1, 'CLD')
