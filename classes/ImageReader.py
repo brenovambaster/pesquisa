@@ -3,9 +3,7 @@ import cv2
 class ImageReader:
     """
     A class used to read images using OpenCV
-
     ...
-
     Attributes
     ----------
     path : str
@@ -20,7 +18,6 @@ class ImageReader:
     def __init__(self, path):
         """
         Constructs all the necessary attributes for the image reader object.
-
         Parameters
         ----------
             path : str
@@ -31,7 +28,6 @@ class ImageReader:
     def read_image(self):
         """
         Attempts to read the image file at the specified path.
-
         Returns
         -------
         image : np.ndarray
