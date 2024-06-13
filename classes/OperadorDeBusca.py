@@ -1,4 +1,3 @@
-import cv2
 import numpy as np
 from classes.descriptor import Descriptor
 from classes.extract_info_file import FileProcessor
