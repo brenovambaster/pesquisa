@@ -5,6 +5,8 @@ import numpy as np
 
 class Distance:
     raio: int = 2
+    EUCLIDEAN = 'euclidean'
+    MANHATTAN = 'manhattan'
 
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -26,9 +28,9 @@ class Distance:
                                             1 / self.raio)
         return self.calculated_distance
 
-    def calculate(self, distance_name, r=None):
+    def calculate(self, distance_name=EUCLIDEAN, r=None):
         """
-        
+        Calcula a distância entre dois vetores de características
         :param distance_name: Nome da distância a ser calculada
         :param r: 
         :return: 

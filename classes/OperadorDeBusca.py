@@ -5,6 +5,9 @@ from classes.extract_info_file import FileProcessor
 
 
 class SearchOperator:
+    EUCLIDEAN = 'euclidean'
+    MANHATTAN = 'manhattan'
+
     def __init__(self, data_file_path):
         """
         :param data_file_path: (str) The path to the file containing the data.
@@ -13,11 +16,11 @@ class SearchOperator:
         self.file_processor = FileProcessor(data_file_path)
         self.data = self.file_processor.process_file()
 
-    def all_knn(self, input_image_search, extractor_name, k=5, distance_name="euclidean"):
+    def all_knn(self, input_image_search, extractor_name, k=5, distance_name=EUCLIDEAN):
         """
         Compute the k most similar images to the input image.
 
-        :param distance_name: "euclidean", "manhattan", "minkowski"
+        :param distance_name: EUCLIDEAN, MANHATTAN
         :param k: The number of most similar images to return. Defaults to 5.
         :param extractor_name: (str) The name of the feature extractor to be used.
         :param input_image_search: (numpy.ndarray) The input image to compare with the images in the database.
