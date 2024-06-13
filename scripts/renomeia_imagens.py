@@ -1,6 +1,7 @@
 import os
 import shutil
 
+
 def rename_images(directory):
     # List all files in the directory
     files = os.listdir(directory)
@@ -29,6 +30,7 @@ def rename_images(directory):
         temp_path = os.path.join(directory, temp_name)
         new_path = os.path.join(directory, new_name)
         shutil.move(temp_path, new_path)
+
 
 # Call the function on your directory
 rename_images("../base_imgs_testes/")
