@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+
 class HTD:
     """
     A class to compute and compare HSV histograms.
