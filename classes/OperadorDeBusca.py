@@ -48,9 +48,3 @@ class SearchOperator:
         # Sort the distances and return the ids of the most similar images
         distances = sorted(distances, key=lambda item: item['distance'])
         return distances[:k]
-
-
-# search_operator = SearchOperator('../output/database.txt')
-# image = cv2.imread('../base_imgs_testes/979_c.png')
-# similar_image_ids = search_operator.all_knn(image, 'HTD', k=1, distance_name='euclidean')
-# print(similar_image_ids)

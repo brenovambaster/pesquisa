@@ -1,39 +1,34 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
+from classes.ImageReader import ImageReader
+from classes.OperadorDeBusca import SearchOperator
+from scripts.extrair_precisao_revocacao import extrai_precisao_revocao
+K_VIZINHOS = 32
+IMG_NAME_QUERY = '1_r0.png'
+# Dados de exemplo img 1_r0
 
-# Função para calcular precisão e revocação
-def calculate_precision_recall(similarities, relevant_results, threshold):
-    # Definir como relevantes as imagens com similaridade acima do limiar
-    predicted_relevant = [1 if sim >= threshold else 0 for sim in similarities]
+# Read the image
+image1 = ImageReader(F"../base_imgs_teste_query/{IMG_NAME_QUERY}").read_image()
 
-    true_positives = sum([1 for pr, rr in zip(predicted_relevant, relevant_results) if pr == rr == 1])
-    false_positives = sum([1 for pr, rr in zip(predicted_relevant, relevant_results) if pr == 1 and rr == 0])
-    false_negatives = sum([1 for pr, rr in zip(predicted_relevant, relevant_results) if pr == 0 and rr == 1])
+operador_de_busca = SearchOperator('../output/database.txt')
+list_similar_imgs = operador_de_busca.all_knn(image1, 'HTD', k=K_VIZINHOS, distance_name=SearchOperator.EUCLIDEAN)
 
-    precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
-    recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
+path_imgs = []
+for obj in list_similar_imgs:
+    path_imgs.append(obj['path_img'])
 
-    return precision, recall
+precision, recall = extrai_precisao_revocao().compute(path_imgs, '1')
 
+print(precision)
+print(recall)
 
-# Carregar as similaridades e os resultados esperados (ajuste conforme necessário)
-similarities = [0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45]
-relevant_results = [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]  # Exemplo de resultados esperados
-
-thresholds = np.linspace(0, 1, 50)
-precisions = []
-recalls = []
-
-for threshold in thresholds:
-    precision, recall = calculate_precision_recall(similarities, relevant_results, threshold)
-    precisions.append(precision)
-    recalls.append(recall)
-
-# Plotar o gráfico de precisão vs. revocação
-plt.figure()
-plt.plot(recalls, precisions, marker='.')
+plt.figure(figsize=(10, 10))
+plt.plot(recall, precision, marker='o', label='1_r0')
+plt.legend("Precision-Recall Curve")
+plt.legend(loc='lower left')
 plt.xlabel('Recall')
 plt.ylabel('Precision')
-plt.title('Precision vs. Recall')
+plt.title(f'Extractor HTD, Distance Euclidean, k={K_VIZINHOS}')
+plt.grid(True)
+plt.figtext(0.5, 0.5, f'Query image: {IMG_NAME_QUERY}', wrap=True, horizontalalignment='center', fontsize=12)
 plt.show()
