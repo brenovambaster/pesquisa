@@ -1,12 +1,17 @@
 import cv2
 import numpy as np
 
+
 class ShowImages:
     def __init__(self, image_path):
         self.image_path = image_path
 
     def show(self, list_similar_imgs):
-
+        """
+         Display the 9 most similar images in a 3x3 grid.
+        :param list_similar_imgs: [{''id': int, 'distance': float32, 'path_img': str},...]
+        :return:
+        """
         images = []
         # Loop over the paths of the 9 most similar images
         for i in list_similar_imgs[:9]:
