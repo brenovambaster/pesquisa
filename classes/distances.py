@@ -1,5 +1,3 @@
-# euclidiana, manhattan, minkowski ...
-
 import numpy as np
 
 
@@ -23,11 +21,6 @@ class Distance:
         self.calculated_distance = np.abs(np.array(self.p1) - np.array(self.p2)).sum()
         return self.calculated_distance
 
-    def minkowski(self):
-        self.calculated_distance = np.power(np.power(np.abs(np.array(self.p1) - np.array(self.p2)), self.raio).sum(),
-                                            1 / self.raio)
-        return self.calculated_distance
-
     def calculate(self, distance_name=EUCLIDEAN, r=None):
         """
         Calcula a distância entre dois vetores de características
@@ -42,7 +35,6 @@ class Distance:
         distances = {
             "euclidean": self.euclidean,
             "manhattan": self.manhattan,
-            "minkowski": self.minkowski
         }
         self.calculated_distance = distances[distance_name]()
         return self.calculated_distance
