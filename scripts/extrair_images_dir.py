@@ -3,10 +3,12 @@ import shutil
 
 # Função para extrair imagens de diretórios de 1 a 15 e copiá-las para o diretório raiz
 
-
 def copiar_imagens(root_dir):
-    # Percorrer todos os diretórios de 1 a 100
-    for i in range(1, 201):
+    __QUANTIDADE_DE_IMAGENS_NO_DIR = 20
+    __QUANTIDADE_DE_CLASSES = 200
+
+    # Percorrer todos os diretórios de 1 a N (Quantidade de classes, cada diretório representa uma classe)
+    for i in range(1, __QUANTIDADE_DE_CLASSES + 1):
         # Caminho do diretório atual
         current_dir = os.path.join(root_dir, str(i))
 
@@ -21,7 +23,7 @@ def copiar_imagens(root_dir):
             # Copia cada imagem para o diretório raiz
             counter = 0
             for img in imagens:
-                if counter == 20:
+                if counter == __QUANTIDADE_DE_IMAGENS_NO_DIR:
                     break
                 source = os.path.join(current_dir, img)
                 destination = os.path.join(root_dir, img)
