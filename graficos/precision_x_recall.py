@@ -36,7 +36,7 @@ plt.plot(recall_manhattan, precision_manhattan, marker='o', label=f'{IMG_NAME_QU
 plt.legend(title="Precision-Recall Curve", loc="lower left")
 plt.xlabel('Recall')
 plt.ylabel('Precision')
-plt.title(f'{EXTRACTOR} HTD, k={K_VIZINHOS}')
+plt.title(f'{EXTRACTOR}, k={K_VIZINHOS}')
 plt.grid(True)
 plt.figtext(0.5, 0.5, f'Query image: {IMG_NAME_QUERY}', wrap=True, horizontalalignment='center', fontsize=12)
 plt.savefig(f'../output/precision_recall_{IMG_NAME_QUERY}', dpi=300, bbox_inches='tight')
