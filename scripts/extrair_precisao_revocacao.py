@@ -1,4 +1,4 @@
-class extrai_precisao_revocao:
+class ExtraiPrecisaoRevocao:
 
     def compute(self, array, classe, num_imgs_por_classe=20):
         """
