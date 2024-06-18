@@ -18,6 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/base_imgs_testes" />
       <excludeFolder url="file://$MODULE_DIR$/venv/bin" />
       <excludeFolder url="file://$MODULE_DIR$/venv/lib" />
+      <excludeFolder url="file://$MODULE_DIR$/venv/Scripts" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

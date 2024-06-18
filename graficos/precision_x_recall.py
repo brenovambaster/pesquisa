@@ -5,10 +5,10 @@ from scripts.extrair_precisao_revocacao import ExtraiPrecisaoRevocao
 
 # Define constants
 K_VIZINHOS = 32
-IMG_NAME_QUERY = '3_r0.png'
-CLASSE = '3'
-EXTRACTOR = 'CLD'
-PATH_DATABASE = '../output/databaseCLD.txt'
+CLASSE = '13'
+EXTRACTOR = 'CSD'
+IMG_NAME_QUERY = f'{CLASSE}_r0.png'
+PATH_DATABASE = f'../output/database{EXTRACTOR}.txt'
 
 
 # Read the image
