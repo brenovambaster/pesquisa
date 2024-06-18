@@ -5,17 +5,21 @@ from scripts.extrair_precisao_revocacao import ExtraiPrecisaoRevocao
 
 # Define constants
 K_VIZINHOS = 32
-CLASSE = '13'
+CLASSE = '1'
 EXTRACTOR = 'CSD'
+
+PATH_IMGS_QUERY = '../base_imgs_teste_query/'
 IMG_NAME_QUERY = f'{CLASSE}_r0.png'
-PATH_DATABASE = f'../output/database{EXTRACTOR}.txt'
+PATH_DATABASE_IMGS = '../base_imgs_testes/'
+PATH_DATABASE_FEATURES = f'../output/database{EXTRACTOR}.txt'
+
 
 
 # Read the image
-image1 = ImageReader(f"../base_imgs_teste_query/{IMG_NAME_QUERY}").read_image()
+image1 = ImageReader(f"{PATH_IMGS_QUERY}{IMG_NAME_QUERY}").read_image()
 
 # Create search operator
-operador_de_busca = SearchOperator(PATH_DATABASE)
+operador_de_busca = SearchOperator(PATH_DATABASE_FEATURES)
 
 # Find similar images with Euclidean and Manhattan distances
 list_similar_imgs_eucl = operador_de_busca.all_knn(image1, EXTRACTOR, k=K_VIZINHOS, distance_name=SearchOperator.EUCLIDEAN)
@@ -26,8 +30,8 @@ path_imgs_eucli = [obj['path_img'] for obj in list_similar_imgs_eucl]
 path_imgs_manhattan = [obj['path_img'] for obj in list_similar_imgs_manhattan]
 
 # Calculate precision and recall
-precision_eucli, recall_eucli = ExtraiPrecisaoRevocao().compute(path_imgs_eucli, CLASSE)
-precision_manhattan, recall_manhattan = ExtraiPrecisaoRevocao().compute(path_imgs_manhattan, CLASSE)
+precision_eucli, recall_eucli = ExtraiPrecisaoRevocao().compute(path_imgs_eucli, CLASSE, dir_base_imgs=PATH_DATABASE_IMGS)
+precision_manhattan, recall_manhattan = ExtraiPrecisaoRevocao().compute(path_imgs_manhattan, CLASSE,dir_base_imgs=PATH_DATABASE_IMGS)
 
 # Generate plot
 plt.figure(figsize=(10, 10))
