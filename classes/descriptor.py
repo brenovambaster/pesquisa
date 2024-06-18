@@ -1,6 +1,6 @@
 # Recebe qual extrator de característica será utilizado ( CSD, CLD ou HTD) e a imagem. Retorna as features da imagem
 
-from classes import cld, csd, dcd, scd
+from classes import cld, csd, dcd, scd,lbp
 from classes import HTD2 as htd
 from classes.distances import Distance
 from classes.interfaces.IExtractor import IExtractor
@@ -40,7 +40,8 @@ class Descriptor:
             "CLD": cld.CLD,
             "CSD": csd.CSD,
             "DCD": dcd.DCD,
-            "SCD": scd.SCD
+            "SCD": scd.SCD,
+            "LBP": lbp.LBP,
         }
 
         if extractor_string in extractors:
