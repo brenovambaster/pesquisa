@@ -1,11 +1,12 @@
 import os
 import shutil
 
+
 # Função para extrair imagens de diretórios de 1 a 15 e copiá-las para o diretório raiz
 
 def copiar_imagens(root_dir):
-    __QUANTIDADE_DE_IMAGENS_NO_DIR = 20
-    __QUANTIDADE_DE_CLASSES = 200
+    __QUANTIDADE_DE_IMAGENS_NO_DIR = 12
+    __QUANTIDADE_DE_CLASSES = 11  # Quantidade de pastas que tem dentro do diretório raiz
 
     # Percorrer todos os diretórios de 1 a N (Quantidade de classes, cada diretório representa uma classe)
     for i in range(1, __QUANTIDADE_DE_CLASSES + 1):
@@ -31,9 +32,10 @@ def copiar_imagens(root_dir):
                 # Verifica se o arquivo já existe no destino para evitar sobreposição
                 if not os.path.exists(destination):
                     shutil.copy(source, destination)
-                    counter+= 1
+                    counter += 1
                 else:
                     print(f"Arquivo {img} já existe no destino. Ignorando...")
 
+
 # Chama a função
-copiar_imagens('../base_imgs_testes/')
+copiar_imagens('../database/')

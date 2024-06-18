@@ -3,7 +3,7 @@ import cv2
 import classes.csd as csd
 
 # Specify the directory containing the images
-image_dir = '../base_imgs_testes/'
+image_dir = '../database/'
 DATABASE_FILE = '../output/databaseCSD.txt'
 
 # Get all the image paths

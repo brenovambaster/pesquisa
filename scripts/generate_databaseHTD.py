@@ -3,7 +3,7 @@ import cv2
 import classes.HTD2 as htd
 
 # Specify the directory containing the images
-image_dir = '../base_imgs_testes/'
+image_dir = '../database/'
 
 # Get all the image paths
 """
@@ -28,13 +28,13 @@ for img_path in image_paths:
     features = htd_obj.extract_features(image)
 
     # Save the features in a file
-    with open('../output/database.txt', 'a') as f:
+    with open('../output/databaseHTD.txt', 'a') as f:
         f.write(f'id={id}|features={features}|lat=123.32|long=-12.3231|path="{img_path}"\n')
         f.close()
 
-    # Map the id to the image name
-    with open('../output/id_map.txt', 'a') as f:
-        f.write(f'id={id}|image={img_path}\n')
-        f.close()
+    # # Map the id to the image name
+    # with open('../output/id_map.txt', 'a') as f:
+    #     f.write(f'id={id}|image={img_path}\n')
+    #     f.close()
 
     id += 1

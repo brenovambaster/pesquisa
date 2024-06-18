@@ -1,5 +1,6 @@
 import os
 import shutil
+_CLASSE = '11'
 
 
 def rename_images(directory):
@@ -26,11 +27,11 @@ def rename_images(directory):
     # Rename from temporary names to final sequential names
     for i, temp_name in enumerate(temp_names, start=1):
         extension = os.path.splitext(temp_name)[1]
-        new_name = f"{i}{extension}"
+        new_name = f"{_CLASSE}_{i}{extension}"
         temp_path = os.path.join(directory, temp_name)
         new_path = os.path.join(directory, new_name)
         shutil.move(temp_path, new_path)
 
 
 # Call the function on your directory
-rename_images("../base_imgs_testes/")
+rename_images(f"../database/{_CLASSE}")

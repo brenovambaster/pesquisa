@@ -3,7 +3,7 @@ import cv2
 import classes.lbp as lbp
 
 # Specify the directory containing the images
-image_dir = '../base_imgs_testes/'
+image_dir = '../database/'
 DATABASE_FILE = '../output/databaseLBP.txt'
 
 # Get all the image paths
@@ -33,8 +33,8 @@ for img_path in image_paths:
         f.close()
 
     # Map the id to the image name
-    with open('../output/id_map.txt', 'a') as f:
-        f.write(f'id={id}|image={img_path}\n')
-        f.close()
+    # with open('../output/id_map.txt', 'a') as f:
+    #     f.write(f'id={id}|image={img_path}\n')
+    #     f.close()
 
     id += 1
