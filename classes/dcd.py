@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
-class DCD():
+
+
+class DCD:
     """
     Dominant Color Descriptor (DCD)
     """
@@ -63,4 +65,3 @@ class DCD():
         mean_value = np.mean(reshaped_block[:, 2])
 
         return [dominant_hue, mean_saturation, mean_value]
-
