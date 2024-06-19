@@ -1,10 +1,12 @@
 import cv2
 import numpy as np
 
+
 class SCD:
     """
     Scalable Color Descriptor (SCD)
     """
+
     def __init__(self, num_blocks=8, num_bins=32):
         self.num_blocks = num_blocks
         self.num_bins = num_bins

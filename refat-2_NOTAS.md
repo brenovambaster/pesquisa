@@ -20,3 +20,11 @@ ___
 
 # Desing de arquitetura
 ![Design de como,até então, está implementado o sistema](arquitetura.png "fluxograma")
+
+
+___
+
+# Reunião 11/06
+- [x] Alterar  a classe `Descritor` com a função de distância
+- [x] Alterar a classe Distância e implementar as distâncias Euclidiana, Manhattan
+- [x] Criar classe para mostrar as imagens; (list_of_images,dir_images)->show_images()

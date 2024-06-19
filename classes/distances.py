@@ -1,11 +1,10 @@
-# euclidiana, manhattan, minkowski ...
-
 import numpy as np
 
 
 class Distance:
-
     raio: int = 2
+    EUCLIDEAN = 'euclidean'
+    MANHATTAN = 'manhattan'
 
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -16,18 +15,19 @@ class Distance:
         self.p2 = p2
 
     def euclidean(self):
-        self.calculated_distance = np.linalg.norm(np.array(self.p1) - np.array(self.p2))
-        return self.calculated_distance
+        return np.linalg.norm(np.array(self.p1) - np.array(self.p2))
 
     def manhattan(self):
         self.calculated_distance = np.abs(np.array(self.p1) - np.array(self.p2)).sum()
         return self.calculated_distance
 
-    def minkowski(self):
-        self.calculated_distance = np.power(np.power(np.abs(np.array(self.p1) - np.array(self.p2)), self.raio).sum(), 1/self.raio)
-        return self.calculated_distance
-
-    def calculate(self, distance_type, r=None):
+    def calculate(self, distance_name=EUCLIDEAN, r=None):
+        """
+        Calcula a distância entre dois vetores de características
+        :param distance_name: Nome da distância a ser calculada
+        :param r: 
+        :return: 
+        """
         # implementer para minkowski receber 'r'
         if r is not None:
             self.raio = r
@@ -35,7 +35,6 @@ class Distance:
         distances = {
             "euclidean": self.euclidean,
             "manhattan": self.manhattan,
-            "minkowski": self.minkowski
         }
-        self.calculated_distance = distances[distance_type]()
+        self.calculated_distance = distances[distance_name]()
         return self.calculated_distance

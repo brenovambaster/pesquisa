@@ -1,39 +1,48 @@
-import numpy as np
 import matplotlib.pyplot as plt
+from classes.ImageReader import ImageReader
+from classes.OperadorDeBusca import SearchOperator
+from scripts.extrair_precisao_revocacao import ExtraiPrecisaoRevocao
+
+# Define constants
+K_VIZINHOS = 32
+CLASSE = '1'
+EXTRACTOR = 'CSD'
+
+PATH_IMGS_QUERY = '../base_imgs_teste_query/'
+IMG_NAME_QUERY = f'{CLASSE}_r0.png'
+PATH_DATABASE_IMGS = '../base_imgs_testes/'
+PATH_DATABASE_FEATURES = f'../output/database{EXTRACTOR}.txt'
 
 
-# Função para calcular precisão e revocação
-def calculate_precision_recall(similarities, relevant_results, threshold):
-    # Definir como relevantes as imagens com similaridade acima do limiar
-    predicted_relevant = [1 if sim >= threshold else 0 for sim in similarities]
 
-    true_positives = sum([1 for pr, rr in zip(predicted_relevant, relevant_results) if pr == rr == 1])
-    false_positives = sum([1 for pr, rr in zip(predicted_relevant, relevant_results) if pr == 1 and rr == 0])
-    false_negatives = sum([1 for pr, rr in zip(predicted_relevant, relevant_results) if pr == 0 and rr == 1])
+# Read the image
+image1 = ImageReader(f"{PATH_IMGS_QUERY}{IMG_NAME_QUERY}").read_image()
 
-    precision = true_positives / (true_positives + false_positives) if (true_positives + false_positives) > 0 else 0
-    recall = true_positives / (true_positives + false_negatives) if (true_positives + false_negatives) > 0 else 0
+# Create search operator
+operador_de_busca = SearchOperator(PATH_DATABASE_FEATURES)
 
-    return precision, recall
+# Find similar images with Euclidean and Manhattan distances
+list_similar_imgs_eucl = operador_de_busca.all_knn(image1, EXTRACTOR, k=K_VIZINHOS, distance_name=SearchOperator.EUCLIDEAN)
+list_similar_imgs_manhattan = operador_de_busca.all_knn(image1, EXTRACTOR, k=K_VIZINHOS, distance_name=SearchOperator.MANHATTAN)
 
+# Extract paths from similar image results
+path_imgs_eucli = [obj['path_img'] for obj in list_similar_imgs_eucl]
+path_imgs_manhattan = [obj['path_img'] for obj in list_similar_imgs_manhattan]
 
-# Carregar as similaridades e os resultados esperados (ajuste conforme necessário)
-similarities = [0.9, 0.85, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45]
-relevant_results = [1, 1, 1, 1, 0, 0, 0, 0, 0, 0]  # Exemplo de resultados esperados
+# Calculate precision and recall
+precision_eucli, recall_eucli = ExtraiPrecisaoRevocao().compute(path_imgs_eucli, CLASSE, dir_base_imgs=PATH_DATABASE_IMGS)
+precision_manhattan, recall_manhattan = ExtraiPrecisaoRevocao().compute(path_imgs_manhattan, CLASSE,dir_base_imgs=PATH_DATABASE_IMGS)
 
-thresholds = np.linspace(0, 1, 50)
-precisions = []
-recalls = []
-
-for threshold in thresholds:
-    precision, recall = calculate_precision_recall(similarities, relevant_results, threshold)
-    precisions.append(precision)
-    recalls.append(recall)
-
-# Plotar o gráfico de precisão vs. revocação
-plt.figure()
-plt.plot(recalls, precisions, marker='.')
+# Generate plot
+plt.figure(figsize=(10, 10))
+plt.plot(recall_eucli, precision_eucli, marker='o', label=f'{IMG_NAME_QUERY} - Euclidean')
+plt.plot(recall_manhattan, precision_manhattan, marker='o', label=f'{IMG_NAME_QUERY} - Manhattan')
+plt.legend(title="Precision-Recall Curve", loc="lower left")
 plt.xlabel('Recall')
 plt.ylabel('Precision')
-plt.title('Precision vs. Recall')
+plt.title(f'{EXTRACTOR}, k={K_VIZINHOS}')
+plt.grid(True)
+plt.figtext(0.5, 0.5, f'Query image: {IMG_NAME_QUERY}', wrap=True, horizontalalignment='center', fontsize=12)
+# plt.savefig(f'../output/precision_recall_{IMG_NAME_QUERY}', dpi=300, bbox_inches='tight')
 plt.show()
+

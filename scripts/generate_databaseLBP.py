@@ -1,12 +1,10 @@
 import os
 import cv2
-import classes.cld as cld
-
-# Specify the directory containing the images
+import classes.lbp as lbp
 
 
-class GenerateDatabaseCLD:
-    DATABASE_FILE = '../output/databaseCLD.txt'
+class GenerateDatabaseLBP:
+    DATABASE_FILE = '../output/databaseLBP.txt'
 
     def __init__(self, image_dir='../base_imgs_testes/'):
         """
@@ -24,7 +22,7 @@ class GenerateDatabaseCLD:
                        img.endswith('.jpg') or img.endswith('.png')]
 
         # Initialize the htd class
-        htd_obj = cld.CLD()
+        htd_obj = lbp.LBP()
 
         # For each image path, extract features and save them in a file
         id = 0  # id for each image in the database file
