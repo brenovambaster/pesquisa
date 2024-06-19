@@ -7,7 +7,6 @@
   * [Installation](#installation)
   * [Dependencies](#dependencies)
   * [DATA-SETS](#data-sets)
-  * [TODO](#todo)
   * [License](#license)
   * [Contact](#contact)
 <!-- TOC -->
@@ -48,9 +47,6 @@ To install this project, follow these steps:
 - https://www.kaggle.com/datasets/sachinpatel21/pothole-image-dataset?resource=download
 - https://datasetninja.com/cracks-and-potholes-in-road
 
-## TODO
-- [ ] Fazer a extração para todas a images e gravar em um arquivo (.csv ou não), 
-        depois medir a distância entre cada uma das imagens.
 
 ## License
 
