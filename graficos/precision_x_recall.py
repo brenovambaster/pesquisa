@@ -1,3 +1,5 @@
+from pprint import pprint
+
 import matplotlib.pyplot as plt
 from classes.ImageReader import ImageReader
 from classes.OperadorDeBusca import SearchOperator
@@ -6,7 +8,7 @@ from scripts.extrair_precisao_revocacao import ExtraiPrecisaoRevocao
 # Define constants
 K_VIZINHOS = 32
 CLASSE = '1'
-EXTRACTOR = 'CSD'
+EXTRACTOR = 'HTD'
 
 PATH_IMGS_QUERY = '../base_imgs_teste_query/'
 IMG_NAME_QUERY = f'{CLASSE}_r0.png'
@@ -32,7 +34,8 @@ path_imgs_manhattan = [obj['path_img'] for obj in list_similar_imgs_manhattan]
 # Calculate precision and recall
 precision_eucli, recall_eucli = ExtraiPrecisaoRevocao().compute(path_imgs_eucli, CLASSE, dir_base_imgs=PATH_DATABASE_IMGS)
 precision_manhattan, recall_manhattan = ExtraiPrecisaoRevocao().compute(path_imgs_manhattan, CLASSE,dir_base_imgs=PATH_DATABASE_IMGS)
-
+pprint(precision_eucli)
+exit(0)
 # Generate plot
 plt.figure(figsize=(10, 10))
 plt.plot(recall_eucli, precision_eucli, marker='o', label=f'{IMG_NAME_QUERY} - Euclidean')
