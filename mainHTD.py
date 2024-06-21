@@ -6,8 +6,8 @@ from classes.OperadorDeBusca import SearchOperator
 # Read the image
 image1 = ImageReader("base_imgs_teste_query/2_r0.png").read_image()
 
-operador_de_busca = SearchOperator('output/database.txt')
-list_similar_imgs = operador_de_busca.all_knn(image1, 'HTD', k=20, distance_name=SearchOperator.EUCLIDEAN)
+operador_de_busca = SearchOperator('output/databaseHTD.txt')
+list_similar_imgs = operador_de_busca.all_knn(image1, 'HTD', k=4000, distance_name=SearchOperator.EUCLIDEAN)
 
 for obj in list_similar_imgs:
     print(obj['path_img'])
