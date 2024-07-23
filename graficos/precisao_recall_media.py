@@ -6,7 +6,7 @@ from classes.OperadorDeBusca import SearchOperator
 from scripts.extrair_precisao_revocacao import ExtraiPrecisaoRevocao
 
 # Define constants
-K_NEIGHBORS = 32
+K_NEIGHBORS = 4000
 CLASS = '1'
 EXTRACTOR = 'HTD'
 TOTAL_DE_IMG_NO_DIR_QUERY = 20
@@ -57,11 +57,12 @@ for i in range(K_NEIGHBORS):
 
 # plot the mean precision and recall
 plt.figure(figsize=(10, 10))
+plt.axis([0.9, 1.1, 0, 1.1])
 plt.plot(Recalls, Precisions, marker='o', label=f'Average  Precision-Recall Curve')
 plt.legend(title="Precision-Recall Curve", loc="lower left")
 plt.xlabel('Recall')
 plt.ylabel('Precision')
 plt.title(f'{EXTRACTOR}, k={K_NEIGHBORS}')
 plt.grid(True)
-plt.savefig(f'../output/precision_recall_average_{EXTRACTOR}', dpi=300, bbox_inches='tight')
+plt.savefig(f'../output/precision_recall_average_{EXTRACTOR}', dpi=400, bbox_inches='tight')
 plt.show()

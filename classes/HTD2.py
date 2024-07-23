@@ -2,6 +2,18 @@ import cv2
 import numpy as np
 
 
+def compare(hist1, hist2):
+    """
+    Compute the distance between two feature vectors.
+    :param hist1: np.array
+    :param hist2: np.array
+    :return: distance
+    :rtype: float
+    """
+    distance = np.linalg.norm(np.array(hist1) - np.array(hist2))
+    return distance
+
+
 class HTD:
     """
     A class to compute and compare HSV histograms.
@@ -47,14 +59,3 @@ class HTD:
 
         histogram = np.concatenate((h_hist, s_hist, v_hist))
         return np.array(histogram).tolist()
-
-    def compare(self, hist1, hist2):
-        """
-        Compute the distance between two feature vectors.
-        :param hist1: np.array
-        :param hist2: np.array
-        :return: distance
-        :rtype: float
-        """
-        distance = np.linalg.norm(np.array(hist1) - np.array(hist2))
-        return distance

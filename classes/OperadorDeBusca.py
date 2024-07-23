@@ -24,7 +24,7 @@ class SearchOperator:
         :param extractor_name: (str) The name of the feature extractor to be used.
         :param input_image_search: (numpy.ndarray) The input image to compare with the images in the database.
 
-        :return distances: [{'id': int, 'distance': float, 'path_img': str}]
+        :return tuple_results: [{'id': int, 'distance': float, 'path_img': str}]
         :rtype: list
         """
         # Extract features from the input image
@@ -35,16 +35,16 @@ class SearchOperator:
         # Read the database file and recuperate the tuples
         file_processor = FileProcessor(self.data_file_path)
         data = file_processor.process_file()
-        distances = []
+        tuple_results = []
         for i in data:
             h2 = np.array(i['features'], dtype=np.float32)
-            distance_info = {
+            result = {
                 'id': i['id'],
                 'distance': float(descriptor.compare(h2, distance_name)),
                 'path_img': i['path']
             }
-            distances.append(distance_info)
+            tuple_results.append(result)
 
-        # Sort the distances and return the ids of the most similar images
-        distances = sorted(distances, key=lambda item: item['distance'])
-        return distances[:k]
+        # Sort the tuple_results and return the ids of the most similar images
+        tuple_results = sorted(tuple_results, key=lambda item: item['distance'])
+        return tuple_results[:k]
