@@ -10,12 +10,13 @@ def distance(p1, p2):
     return np.linalg.norm(p1 - p2)
 
 
-def half_nested_loop_wide_join(relation_t, k, xi) -> CustomHeap:
+def half_nested_loop_wide_join(relation_t, k:int, xi:float) -> CustomHeap:
     """
     :param relation_t: Relation
     :param k: k-nearest neighbors
     :param xi: (ξ) Similarity threshold
-    :return:
+    :return: q
+    :rtype: CustomHeap
     """
     q = CustomHeap()
     counter_j = 0

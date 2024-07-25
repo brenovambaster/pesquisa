@@ -11,13 +11,14 @@ def distance(p1, p2):
     return np.linalg.norm(p1 - p2)
 
 
-def nested_loop_wide_join(t1, t2, k, xi) -> CustomHeap:
+def nested_loop_wide_join(t1, t2, k:int, xi:float) -> CustomHeap:
     """
     :param t1: Relation T
     :param t2: Relation T (copy of T1)
     :param k: k-nearest neighbors
     :param xi: (ξ) Similarity threshold
     :return: q
+    :rtype: CustomHeap
     """
     q = CustomHeap()
 
@@ -56,6 +57,8 @@ data = classes.extract_info_file.FileProcessor('./output/databaseHTD.txt').proce
 # Transform the data into a list of dictionaries
 T1 = []
 T2 = []
+
+# TODO: refactor this code to avoid repetition
 for i in data:
     h2 = np.array(i['features'], dtype=np.float32)
     result = {
