@@ -35,16 +35,14 @@ def nested_loop_wide_join(T1, T2, k, xi):
                     Q.add_item(a1, a2, dist)
 
                 else:
-                    q = Q.heap[0] # Get the element with the smallest distance
-                    if dist< q[1][2]:
+                    q = Q.heap[0]  # Get the element with the smallest distance
+                    if dist < q[1][2]:
                         Q.pop_item()
                         Q.add_item(a1, a2, dist)
 
-            # print(Q.heap)
-
             # ------- Mostrar apenas 7 iterações para teste. Remover para obter o resultado completo
             if counterJ == 7:
-                return
+                return Q
             counterJ += 1
             # --------
 
@@ -66,8 +64,7 @@ for i in data:
     }
     T1.append(result)
 
-print(T1[0]['path_img'])
-
 T2 = copy.deepcopy(T1)
 
-nested_loop_wide_join(T1, T2, 5, 0.5)
+Q_result = nested_loop_wide_join(T1, T2, 5, 0.5)
+print(Q_result)

@@ -18,6 +18,9 @@ class CustomHeap:
         self.REMOVED = '<removed-task>'
         self.counter = 0
 
+    def __str__(self):
+        return str(self.heap)
+
     def add_item(self, a1: Element, a2: Element, distance=None):
         'Add a new item or update the priority of an existing item'
         item_id = (a1.id, a2.id)
@@ -37,10 +40,8 @@ class CustomHeap:
     def pop_item(self):
         'Remove and return the lowest priority task. Raise KeyError if empty.'
         while self.heap:
-            distance, count, item = heapq.heappop(self.heap)
+            count, item = heapq.heappop(self.heap)  # Unpack the entry into two variables.
             if item is not self.REMOVED:
                 del self.entry_finder[(item[0].id, item[1].id)]
                 return item
         raise KeyError('pop from an empty priority queue')
-
-
