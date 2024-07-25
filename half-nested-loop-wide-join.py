@@ -1,39 +1,47 @@
-import classes.extract_info_file
+
 import numpy as np
+
 import classes.extract_info_file
-from scripts import customHeap
+from scripts.customHeap import CustomHeap
+from scripts.customHeap import Element
 
 
 def distance(p1, p2):
     return np.linalg.norm(p1 - p2)
 
 
-def half_nested_loop_wide_join(T, k, xi):
+def half_nested_loop_wide_join(relation_t, k, xi) -> CustomHeap:
     """
-    :param T: Relation
+    :param relation_t: Relation
     :param k: k-nearest neighbors
     :param xi: (ξ) Similarity threshold
     :return:
     """
-    Q = customHeap.CustomHeap()
+    q = CustomHeap()
+    counter_j = 0
 
-    for i in range(len(T) - 1):
-        a1 = customHeap.Element(T[i]['id'], T[i]['features'], T[i]['path_img'])
+    for i in range(len(relation_t) - 1):
+        a1 = Element(relation_t[i]['id'], relation_t[i]['features'], relation_t[i]['path_img'])
 
-        for j in range(i + 1, len(T)):
-            a2 = customHeap.Element(T[j]['id'], T[j]['features'], T[j]['path_img'])
+        for j in range(i + 1, len(relation_t)):
+            a2 = Element(relation_t[j]['id'], relation_t[j]['features'], relation_t[j]['path_img'])
             dist = distance(a1.features, a2.features)
-
+            # print(j)
             if dist <= xi:
-                if len(Q.heap) < k:
-                    Q.add_item(a1, a2, dist)
+                if len(q.heap) < k:
+                    q.add_item(a1, a2, dist)
                 else:
-                    q = Q.heap[0]  # get the element with the smallest distance
+                    q = q.heap[0]  # get the element with the smallest distance
                     if dist < q[1][2]:
-                        Q.pop_item()
-                        Q.add_item(a1, a2, dist)
+                        q.pop_item()
+                        q.add_item(a1, a2, dist)
 
-    return Q
+        # ------- Mostrar apenas 7 iterações para teste. Remover para obter o resultado completo
+        if counter_j == 7:
+            return q
+        counter_j += 1
+        # --------
+        return q
 
 
 # Leitura e processamento dos dados de entrada
@@ -51,8 +59,6 @@ for i in data:
     }
     T.append(result)
 
-# Executar o algoritmo half_nested_loop_wide_join
 resultado = half_nested_loop_wide_join(T, 5, 0.5)
 
-# Printar o resultado
 print(resultado)

@@ -3,47 +3,48 @@ import numpy as np
 
 import classes.extract_info_file
 from classes.ImageReader import ImageReader
-from scripts import customHeap
+from scripts.customHeap import CustomHeap
+from scripts.customHeap import Element
 
 
 def distance(p1, p2):
     return np.linalg.norm(p1 - p2)
 
 
-def nested_loop_wide_join(T1, T2, k, xi):
+def nested_loop_wide_join(t1, t2, k, xi) -> CustomHeap:
     """
-    :param t1: Relation 1
-    :param t2: Relation 2
+    :param t1: Relation T
+    :param t2: Relation T (copy of T1)
     :param k: k-nearest neighbors
     :param xi: (ξ) Similarity threshold
-    :return:
+    :return: q
     """
-    Q = customHeap.CustomHeap()
+    q = CustomHeap()
 
-    counterJ = 0
+    counter_j = 0
 
-    for i in range(1, len(T1)):
-        a1 = customHeap.Element(T1[i]['id'], T1[i]['features'], T1[i]['path_img'])
+    for i in range(1, len(t1)):
+        a1 = Element(t1[i]['id'], t1[i]['features'], t1[i]['path_img'])
 
-        for j in range(1, len(T2)):
-            a2 = customHeap.Element(T2[j]['id'], T2[j]['features'], T2[j]['path_img'])
+        for j in range(1, len(t2)):
+            a2 = Element(t2[j]['id'], t2[j]['features'], t2[j]['path_img'])
             dist = distance(a1.features, a2.features)
 
             if a1.id != a2.id and dist <= xi:
 
-                if len(Q.heap) <= k:
-                    Q.add_item(a1, a2, dist)
+                if len(q.heap) <= k:
+                    q.add_item(a1, a2, dist)
 
                 else:
-                    q = Q.heap[0]  # Get the element with the smallest distance
+                    q = q.heap[0]  # Get the element with the smallest distance
                     if dist < q[1][2]:
-                        Q.pop_item()
-                        Q.add_item(a1, a2, dist)
+                        q.pop_item()
+                        q.add_item(a1, a2, dist)
 
             # ------- Mostrar apenas 7 iterações para teste. Remover para obter o resultado completo
-            if counterJ == 7:
-                return Q
-            counterJ += 1
+            if counter_j == 7:
+                return q
+            counter_j += 1
             # --------
 
 

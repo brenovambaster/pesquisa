@@ -22,7 +22,7 @@ class CustomHeap:
         return str(self.heap)
 
     def add_item(self, a1: Element, a2: Element, distance=None):
-        'Add a new item or update the priority of an existing item'
+        """ Remove and return the lowest priority task. Raise KeyError if empty """
         item_id = (a1.id, a2.id)
         if item_id in self.entry_finder:
             self.remove_item(item_id)
@@ -33,12 +33,12 @@ class CustomHeap:
         heapq.heappush(self.heap, entry)
 
     def remove_item(self, item_id):
-        'Mark an existing item as REMOVED. Raise KeyError if not found.'
+        """ Mark an existing item as REMOVED. Raise KeyError if not found. """
         entry = self.entry_finder.pop(item_id)
         entry[-1] = self.REMOVED
 
     def pop_item(self):
-        'Remove and return the lowest priority task. Raise KeyError if empty.'
+        """ Remove and return the lowest priority task. Raise KeyError if empty. """
         while self.heap:
             count, item = heapq.heappop(self.heap)  # Unpack the entry into two variables.
             if item is not self.REMOVED:
