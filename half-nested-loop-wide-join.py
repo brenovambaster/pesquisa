@@ -17,14 +17,14 @@ def half_nested_loop_wide_join(T, k, xi):
     """
     Q = customHeap.CustomHeap()
 
-    for i in range(len(T) - 1):
+    for i in range(0, len(T) - 1):
         a1 = customHeap.Element(T[i]['id'], T[i]['features'], T[i]['path_img'])
 
         for j in range(i + 1, len(T)):
             a2 = customHeap.Element(T[j]['id'], T[j]['features'], T[j]['path_img'])
             dist = distance(a1.features, a2.features)
 
-            if dist <= xi:
+            if a1.id != a2.id and dist <= xi:
                 if len(Q.heap) < k:
                     Q.add_item(a1, a2, dist)
                 else:
@@ -32,12 +32,10 @@ def half_nested_loop_wide_join(T, k, xi):
                     if dist < q[1][2]:
                         Q.pop_item()
                         Q.add_item(a1, a2, dist)
-
     return Q
 
 
 # Leitura e processamento dos dados de entrada
-
 data = classes.extract_info_file.FileProcessor('./output/databaseHTD.txt').process_file()
 
 # Transformar os dados em uma lista de dicionários
@@ -51,8 +49,8 @@ for i in data:
     }
     T.append(result)
 
-# Executar o algoritmo half_nested_loop_wide_join
+#Executar o algoritmo half_nested_loop_wide_join
 resultado = half_nested_loop_wide_join(T, 5, 0.5)
 
-# Printar o resultado
+#Printar o resultado
 print(resultado)

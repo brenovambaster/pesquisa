@@ -1,6 +1,6 @@
 import heapq
 
-
+# TODO: REVER ISSO AQUI => ANOTAÇÃO PESQUISA K-PARES.
 class Element:
     def __init__(self, id, features, path_img):
         self.id = id
