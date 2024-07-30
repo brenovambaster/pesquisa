@@ -51,8 +51,10 @@ def half_nested_loop_wide_join(T: List[Dict], k: int, distance_func: Callable[[n
                 if distance <= threshold:
                     pair = (t1['id'], t2['id'], distance, path_img)
                     insert_into_priority_queue(queue, pair, k)
-        results[t1['id']] = queue
 
+        # Ordena a fila de prioridade (queue) por distância x[2] (índice 2) é a distância no par (id1, id2, distância)
+        queue_sorted = sorted(queue, key=lambda x: x[2])
+        results[t1['id']] = queue_sorted
     return results
 
 
@@ -75,10 +77,10 @@ def main():
 
     # Parâmetros
     k = 3  # Número de pares mais similares a serem retornados para cada elemento
-    threshold = 1  # Limite de distância
+    threshold = 0.4  # Limite de distância
 
     # Executa o algoritmo
-    result = half_nested_loop_wide_join(elements[:200], k, calculate_distance, threshold)
+    result = half_nested_loop_wide_join(elements[:100], k, calculate_distance, threshold)
 
     # Exibe os resultados
     for id, neighbors in result.items():
