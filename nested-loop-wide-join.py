@@ -47,9 +47,6 @@ def nested_loop_wide_join(T1, T2, k, xi):
             # --------
 
 
-# Read the image
-image1 = ImageReader("base_imgs_testes/1_r40.png").read_image()
-
 data = classes.extract_info_file.FileProcessor('./output/databaseHTD.txt').process_file()
 
 # Transform the data into a list of dictionaries

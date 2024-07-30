@@ -1,56 +1,91 @@
-import classes.extract_info_file
+import heapq
+import string
+
 import numpy as np
 import classes.extract_info_file
-from scripts import customHeap
+from typing import List, Tuple, Callable, Dict
+
+# Tipo de dados para representar um par e sua distância
+Pair = Tuple[int, int, float, string]
 
 
-def distance(p1, p2):
-    return np.linalg.norm(p1 - p2)
+# Função para calcular a distância entre dois vetores de características
+def calculate_distance(features1: np.ndarray, features2: np.ndarray) -> float:
+    # Exemplo de cálculo de distância euclidiana
+    return np.linalg.norm(features1 - features2)
 
 
-def half_nested_loop_wide_join(T, k, xi):
+# Função para inserir um par na fila de prioridade
+def insert_into_priority_queue(queue: List[Pair], pair: Pair, k: int):
     """
-    :param T: Relation
-    :param k: k-nearest neighbors
-    :param xi: (ξ) Similarity threshold
-    :return:
+    Insere um par na fila de prioridade, garantindo que apenas os k pares mais próximos sejam mantidos.
     """
-    Q = customHeap.CustomHeap()
-
-    for i in range(0, len(T) - 1):
-        a1 = customHeap.Element(T[i]['id'], T[i]['features'], T[i]['path_img'])
-
-        for j in range(i + 1, len(T)):
-            a2 = customHeap.Element(T[j]['id'], T[j]['features'], T[j]['path_img'])
-            dist = distance(a1.features, a2.features)
-
-            if a1.id != a2.id and dist <= xi:
-                if len(Q.heap) < k:
-                    Q.add_item(a1, a2, dist)
-                else:
-                    q = Q.heap[0]  # get the element with the smallest distance
-                    if dist < q[1][2]:
-                        Q.pop_item()
-                        Q.add_item(a1, a2, dist)
-    return Q
+    if len(queue) < k:
+        heapq.heappush(queue, pair)
+    else:
+        # Substitui o par mais distante, se o novo par for mais próximo
+        if pair[2] < queue[0][2]:
+            heapq.heapreplace(queue, pair)
 
 
-# Leitura e processamento dos dados de entrada
-data = classes.extract_info_file.FileProcessor('./output/databaseHTD.txt').process_file()
+# Função principal para o Half Nested-Loop Wide-Join
+def half_nested_loop_wide_join(T: List[Dict], k: int, distance_func: Callable[[np.ndarray, np.ndarray], float],
+                               threshold: float) -> Dict[int, List[Pair]]:
+    """
+    Executa o Half Nested-Loop Wide-Join para encontrar os k pares mais similares para cada elemento.
 
-# Transformar os dados em uma lista de dicionários
-T = []
-for i in data:
-    h2 = np.array(i['features'], dtype=np.float32)
-    result = {
-        'id': i['id'],
-        'features': h2,
-        'path_img': i['path']
-    }
-    T.append(result)
+    :param T: Lista de elementos a serem comparados, cada elemento é um dicionário com 'id' e 'features'.
+    :param k: Número de pares mais similares a serem retornados para cada elemento.
+    :param distance_func: Função para calcular a distância entre dois vetores de características.
+    :param threshold: Limite de distância para considerar um par como similar.
+    :return: Dicionário onde a chave é o id do elemento e o valor é uma lista de k pares mais similares, cada um como (id, id, distância).
+    """
+    results = {}
 
-#Executar o algoritmo half_nested_loop_wide_join
-resultado = half_nested_loop_wide_join(T, 5, 0.5)
+    for t1 in T:
+        queue = []
+        for t2 in T:
+            if t1['id'] != t2['id']:
+                distance = distance_func(t1['features'], t2['features'])
+                path_img = t2['path_img']
+                if distance <= threshold:
+                    pair = (t1['id'], t2['id'], distance, path_img)
+                    insert_into_priority_queue(queue, pair, k)
+        results[t1['id']] = queue
 
-#Printar o resultado
-print(resultado)
+    return results
+
+
+# Exemplo de uso
+def main():
+    # Lista de elementos com suas características
+    data = classes.extract_info_file.FileProcessor('./output/databaseHTD.txt').process_file()
+
+    # Transform the data into a list of dictionaries
+    elements = []
+
+    for i in data:
+        h2 = np.array(i['features'], dtype=np.float32)
+        result = {
+            'id': i['id'],
+            'features': h2,
+            'path_img': i['path']
+        }
+        elements.append(result)
+
+    # Parâmetros
+    k = 3  # Número de pares mais similares a serem retornados para cada elemento
+    threshold = 1  # Limite de distância
+
+    # Executa o algoritmo
+    result = half_nested_loop_wide_join(elements[:200], k, calculate_distance, threshold)
+
+    # Exibe os resultados
+    for id, neighbors in result.items():
+        print(f"Os {k} pares mais similares para o elemento com id {id} são:")
+        for pair in neighbors:
+            print(pair)
+
+
+if __name__ == "__main__":
+    main()
