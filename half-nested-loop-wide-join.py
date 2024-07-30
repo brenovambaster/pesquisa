@@ -1,11 +1,13 @@
 import heapq
 import string
+import timeit
 
 import numpy as np
 import classes.extract_info_file
 from typing import List, Tuple, Callable, Dict
 
 # Tipo de dados para representar um par e sua distância
+# Tuple[id, id, distancia, path_img]
 Pair = Tuple[int, int, float, string]
 
 
@@ -59,7 +61,15 @@ def half_nested_loop_wide_join(T: List[Dict], k: int, distance_func: Callable[[n
 
 
 # Exemplo de uso
-def main():
+def main(k: int = 1, threshold: float = 0.3):
+    """
+
+    :param k: Numero de vizinhos próximos
+    :param threshold: Limiar de distância
+    :return:
+    """
+    print(f"Setup: k={k}, threshold={threshold}")
+
     # Lista de elementos com suas características
     data = classes.extract_info_file.FileProcessor('./output/databaseHTD.txt').process_file()
 
@@ -75,12 +85,8 @@ def main():
         }
         elements.append(result)
 
-    # Parâmetros
-    k = 3  # Número de pares mais similares a serem retornados para cada elemento
-    threshold = 0.4  # Limite de distância
-
     # Executa o algoritmo
-    result = half_nested_loop_wide_join(elements[:100], k, calculate_distance, threshold)
+    result = half_nested_loop_wide_join(elements, k, calculate_distance, threshold)
 
     # Exibe os resultados
     for id, neighbors in result.items():
@@ -90,4 +96,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    start = timeit.default_timer()
+    main(k=3, threshold=0.4)
+    print("The difference of time is :", timeit.default_timer() - start)
