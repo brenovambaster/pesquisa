@@ -13,7 +13,7 @@
 
 | Anotações       | Arquivo                                 |
 |-----------------|-----------------------------------------|
-| Notas da branch | [o quem sido feito](./refat-2_NOTAS.md) |
+| Notas da branch | [o que tem sido feito](./refat-2_NOTAS.md) |
 | To-do list      |                                         |
 
 
