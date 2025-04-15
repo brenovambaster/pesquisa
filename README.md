@@ -49,25 +49,25 @@ Para fazer uso das ferramentas disponibilizadas neste repositório, recomenda-se
 5. Embora o uso do IntelliJ IDEA seja recomendado para uma experiência otimizada, qualquer IDE com suporte a Python pode ser utilizada.
 
 # Resultados e Aplicações
-A avaliação dos extratores de características foi conduzida com base em conjuntos de dados públicos, como o
-"Pothole Image Dataset" e o "Cracks and Potholes in Road", amplamente acessíveis em repositórios como Kaggle e
-DatasetNinja. Os resultados indicaram que determinados extratores, como o Color Structure Descriptor (CSD) e 
-o Homogeneous Texture Descriptor (HTD), exibiram desempenho superior em relação a outros métodos testados, 
-particularmente em condições ideais, caracterizadas por imagens uniformes e com iluminação adequada. Contudo, 
-foi constatada uma redução significativa na precisão desses extratores quando submetidos a variações nas imagens,
-tais como rotação, presença de sombras ou ruídos, o que destaca a sensibilidade inerente dessas técnicas a perturbações 
-externas.
 
-Historicamente, métodos de extração de características, como os analisados neste estudo, foram amplamente empregados 
-em tarefas de busca por similaridade de imagens. Apesar disso, sua eficácia mostrou-se limitada em situações nas quais
-as imagens sofrem transformações ou distorções, comprometendo a confiabilidade dos resultados. Os experimentos realizados
-corroboram que, para imagens uniformes e livres de ruídos expressivos, esses extratores tradicionais conseguem atingir
-desempenho satisfatório. Por outro lado, em cenários mais desafiadores, caracterizados por maior heterogeneidade ou 
-complexidade visual, os resultados evidenciam a necessidade de explorar abordagens alternativas. Nesse contexto, 
-técnicas baseadas em Redes Neurais Convolucionais (CNNs) emergem como uma solução promissora, dado seu maior potencial 
-de robustez frente a variações nas imagens e sua capacidade de generalização em diferentes condições.
+A avaliação dos extratores de características foi conduzida com base em conjuntos de dados públicos, incluindo o "Pothole Image Dataset", o "Cracks and Potholes in Road" (disponíveis em repositórios como Kaggle e DatasetNinja), e o ALOI (Amsterdam Library of Object Images).
+O ALOI é uma coleção de imagens coloridas de mil pequenos objetos, registrada para fins científicos. Para capturar a variação sensorial nos registros de objetos, foram sistematicamente variados o ângulo de visão, o ângulo de iluminação e a cor da iluminação para cada objeto, além de capturadas imagens estéreo de linha de base ampla.
+Os resultados indicaram que determinados extratores, como o Color Structure Descriptor (CSD) e o Homogeneous Texture Descriptor (HTD), exibiram desempenho superior em relação a outros métodos testados, particularmente em condições ideais, caracterizadas por imagens uniformes e com iluminação adequada. Especificamente, o HTD destacou-se em ambientes controlados, conseguindo recuperar com precisão todas as imagens similares da base ALOI. 
+Contudo, foi constatada uma redução significativa na precisão desses extratores quando submetidos a variações nas imagens, tais como rotação, presença de sombras ou ruídos, o que destaca a sensibilidade inerente dessas técnicas a perturbações externas. Ao criar uma nova base com problemas reais, como imagens de buracos nas ruas para buscar por duplicatas, o resultado do HTD não foi tão satisfatório, apresentando imagens não correlatas já nas primeiras posições do array de distância, comprometendo a identificação das imagens mais semelhantes. 
+Historicamente, métodos de extração de características, como os analisados neste estudo, foram amplamente empregados em tarefas de busca por similaridade de imagens. Apesar disso, sua eficácia mostrou-se limitada em situações nas quais as imagens sofrem transformações ou distorções, comprometendo a confiabilidade dos resultados. Os experimentos realizados corroboram que, para imagens uniformes e livres de ruídos expressivos, esses extratores tradicionais conseguem atingir desempenho satisfatório. Por outro lado, em cenários mais desafiadores, caracterizados por maior heterogeneidade ou complexidade visual, os resultados evidenciam a necessidade de explorar abordagens alternativas. 
+Nesse contexto, técnicas baseadas em Redes Neurais Convolucionais (CNNs) emergem como uma solução promissora, dado seu maior potencial de robustez frente a variações nas imagens e sua capacidade de generalização em diferentes condições.
+Portanto, os extratores avaliados demonstram aplicabilidade em domínios específicos, como a detecção de defeitos em superfícies ou a análise de imagens com padrões visuais consistentes. No entanto, sua utilização em contextos mais amplos e diversificados exige ponderação, sendo recomendável a integração de métodos avançados, como os baseados em aprendizado profundo, para superar as limitações observadas e aprimorar a precisão em tarefas de busca por similaridade. 
 
-Portanto, os extratores avaliados demonstram aplicabilidade em domínios específicos, como a detecção de defeitos em 
-superfícies ou a análise de imagens com padrões visuais consistentes. No entanto, sua utilização em contextos mais amplos 
-e diversificados exige ponderação, sendo recomendável a integração de métodos avançados, como os baseados em aprendizado 
-profundo, para superar as limitações observadas e aprimorar a precisão em tarefas de busca por similaridade.
+
+ 
+
+
+
+ 
+ 
+ 
+
+
+ 
+ 
+ 
