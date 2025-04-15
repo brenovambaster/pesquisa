@@ -1,3 +1,5 @@
 base_imgs_testes/
 output/
 classes/__pycache__/
+venv/
+__pycache__/
