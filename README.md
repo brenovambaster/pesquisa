@@ -6,11 +6,11 @@
 - [Resultados e Aplicações](#resultados-e-aplicações)
 - [Gráficos](#gráficos)
 - [Exemplos de pesquisa por similaridade](#exemplos-de-pesquisa-por-similaridade)
-    - [Imagem  de input a ser pesquisada para encontrar similares](#imagem--de-input-a-ser-pesquisada-para-encontrar-similares)
-    - [Resultado HTD](#resultado-htd)
-    - [Resultado do CSD](#resultado-do-csd)
-    - [Resultado do CLD](#resultado-do-cld)
-    - [Resultado do LBP](#resultado-do-lbp)
+  - [Imagem  de input a ser pesquisada para encontrar similares](#imagem--de-input-a-ser-pesquisada-para-encontrar-similares)
+  - [Resultado HTD](#resultado-htd)
+  - [Resultado do CSD](#resultado-do-csd)
+  - [Resultado do CLD](#resultado-do-cld)
+  - [Resultado do LBP](#resultado-do-lbp)
 
 # Repositório de Extratores de Características para Busca por Similaridade de Imagens
 
