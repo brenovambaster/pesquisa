@@ -3,6 +3,9 @@ import numpy as np
 
 
 class ShowImages:
+    MAX_IMAGES = 9
+    RESOLUTION = (300, 250)
+
     def __init__(self, image_path):
         self.image_path = image_path
 
@@ -13,12 +16,12 @@ class ShowImages:
         :return:
         """
         images = []
-        # Loop over the paths of the 9 most similar images
-        for i in list_similar_imgs[:9]:
+        # Loop over the paths of the N most similar images
+        for i in list_similar_imgs[:self.MAX_IMAGES]:
             path = i['path_img'].replace("../", "")
             # Read the image
             image = cv2.imread(path)
-            image = cv2.resize(image, (400, 300))
+            image = cv2.resize(image, self.RESOLUTION)
             distance_text = str(i['distance'])
             image = cv2.putText(
                 image,  # Image object
@@ -36,8 +39,8 @@ class ShowImages:
             # Append the image to the list
             images.append(image)
 
-        # Verificar se há exatamente 9 imagens
-        if len(images) != 9:
+        # Verificar se há exatamente N imagens
+        if len(images) != self.MAX_IMAGES:
             raise ValueError("O número de imagens deve ser exatamente 9 para formar uma grade 3x3.")
 
         # Definir o tamanho de cada imagem (incluindo a borda)

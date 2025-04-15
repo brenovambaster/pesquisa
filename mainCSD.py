@@ -4,7 +4,7 @@ from scripts.show_images import ShowImages
 from classes.OperadorDeBusca import SearchOperator
 
 # Read the image
-image1 = ImageReader("base_imgs_teste_query/14_r0.png").read_image()
+image1 = ImageReader("base_imgs_teste_query/1_r0.png").read_image()
 
 operador_de_busca = SearchOperator('output/databaseCSD.txt')
 list_similar_imgs = operador_de_busca.all_knn(image1, 'CSD', k=9, distance_name=SearchOperator.EUCLIDEAN)

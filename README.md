@@ -7,16 +7,32 @@
 
 
 # Repositório de Extratores de Características para Busca por Similaridade de Imagens
-Este repositório foi desenvolvido como parte de um projeto de pesquisa dedicado à implementação de extratores de características de imagens para busca por similaridade. O objetivo principal é disponibilizar uma coleção de ferramentas computacionais que permitem a extração de características visuais de imagens, como Color Structure Descriptor (CSD), Color Layout Descriptor (CLD), Homogeneous Texture Descriptor (HTD), Scalable Color Descriptor (SCD) e Dominant Color Descriptor (DCD), e sua subsequente utilização em sistemas de busca por similaridade em bancos de dados de imagens.
+Este repositório foi desenvolvido como parte de um projeto de pesquisa dedicado à implementação de extratores de 
+características de imagens para busca por similaridade. O objetivo principal é disponibilizar uma coleção de ferramentas
+computacionais que permitem a extração de características visuais de imagens, como Color Structure Descriptor (CSD), 
+Color Layout Descriptor (CLD), Homogeneous Texture Descriptor (HTD), Scalable Color Descriptor (SCD) e Dominant Color 
+Descriptor (DCD), e sua subsequente utilização em sistemas de busca por similaridade em bancos de dados de imagens.
 
 # Contexto do Projeto
-A busca por similaridade de imagens constitui uma área de pesquisa essencial em diversas aplicações de visão computacional, incluindo sistemas de recomendação, detecção de plágio, análise de conteúdo visual e organização de grandes coleções de imagens. Nesse contexto, os extratores de características desempenham um papel central ao transformar imagens em representações numéricas que capturam aspectos visuais específicos, como cor, textura e layout, possibilitando comparações eficientes entre elas. Este projeto de pesquisa foi motivado pela necessidade de implementar e testar tais extratores em cenários práticos, contribuindo para o avanço de técnicas de recuperação de imagens baseadas em conteúdo.
+A busca por similaridade de imagens constitui uma área de pesquisa essencial em diversas aplicações de visão computacional,
+incluindo sistemas de recomendação, detecção de plágio, análise de conteúdo visual e organização de grandes coleções de 
+imagens. Nesse contexto, os extratores de características desempenham um papel central ao transformar imagens em 
+representações numéricas que capturam aspectos visuais específicos, como cor, textura e layout, possibilitando comparações
+eficientes entre elas. Este projeto de pesquisa foi motivado pela necessidade de implementar e testar tais extratores em 
+cenários práticos, contribuindo para o avanço de técnicas de recuperação de imagens baseadas em conteúdo.
 
 # Objetivo do Repositório
-O repositório tem como objetivo principal oferecer uma implementação robusta, modular e acessível dos extratores de características mencionados, permitindo sua integração em sistemas de busca por similaridade. Através dessas ferramentas, é possível extrair características de imagens, armazená-las em um espaço de busca (como um banco de dados) e, posteriormente, realizar consultas para identificar imagens similares com base em uma ou mais dessas características. O foco é facilitar tanto a experimentação por pesquisadores quanto a aplicação prática por desenvolvedores em projetos de visão computacional.
+O repositório tem como objetivo principal oferecer uma implementação robusta, modular e acessível dos extratores
+de características mencionados, permitindo sua integração em sistemas de busca por similaridade. Através dessas 
+ferramentas, é possível extrair características de imagens, armazená-las em um espaço de busca (como um banco de dados) 
+e, posteriormente, realizar consultas para identificar imagens similares com base em uma ou mais dessas características. 
+O foco é facilitar tanto a experimentação por pesquisadores quanto a aplicação prática por desenvolvedores em projetos de
+visão computacional.
 
 # Tecnologias Utilizadas
-O desenvolvimento do repositório foi realizado utilizando a linguagem de programação Python (versão 3.11.0b4), escolhida por sua ampla adoção na comunidade científica e por sua rica ecosystema de bibliotecas para processamento de imagens. As principais bibliotecas empregadas incluem:
+O desenvolvimento do repositório foi realizado utilizando a linguagem de programação Python (versão 3.11.0b4), 
+escolhida por sua ampla adoção na comunidade científica e por sua rica ecosystema de bibliotecas para processamento de 
+imagens. As principais bibliotecas empregadas incluem:
 
 - OpenCV (versão 4.9.0.80): para manipulação e pré-processamento de imagens.
 - NumPy (versão 1.26.4): para operações numéricas eficientes com arrays multidimensionais.
@@ -33,8 +49,25 @@ Para fazer uso das ferramentas disponibilizadas neste repositório, recomenda-se
 5. Embora o uso do IntelliJ IDEA seja recomendado para uma experiência otimizada, qualquer IDE com suporte a Python pode ser utilizada.
 
 # Resultados e Aplicações
-A avaliação dos extratores de características foi conduzida com base em conjuntos de dados públicos, como o "Pothole Image Dataset" e o "Cracks and Potholes in Road", amplamente acessíveis em repositórios como Kaggle e DatasetNinja. Os resultados indicaram que determinados extratores, como o Color Structure Descriptor (CSD) e o Homogeneous Texture Descriptor (HTD), exibiram desempenho superior em relação a outros métodos testados, particularmente em condições ideais, caracterizadas por imagens uniformes e com iluminação adequada. Contudo, foi constatada uma redução significativa na precisão desses extratores quando submetidos a variações nas imagens, tais como rotação, presença de sombras ou ruídos, o que destaca a sensibilidade inerente dessas técnicas a perturbações externas.
+A avaliação dos extratores de características foi conduzida com base em conjuntos de dados públicos, como o
+"Pothole Image Dataset" e o "Cracks and Potholes in Road", amplamente acessíveis em repositórios como Kaggle e
+DatasetNinja. Os resultados indicaram que determinados extratores, como o Color Structure Descriptor (CSD) e 
+o Homogeneous Texture Descriptor (HTD), exibiram desempenho superior em relação a outros métodos testados, 
+particularmente em condições ideais, caracterizadas por imagens uniformes e com iluminação adequada. Contudo, 
+foi constatada uma redução significativa na precisão desses extratores quando submetidos a variações nas imagens,
+tais como rotação, presença de sombras ou ruídos, o que destaca a sensibilidade inerente dessas técnicas a perturbações 
+externas.
 
-Historicamente, métodos de extração de características, como os analisados neste estudo, foram amplamente empregados em tarefas de busca por similaridade de imagens. Apesar disso, sua eficácia mostrou-se limitada em situações nas quais as imagens sofrem transformações ou distorções, comprometendo a confiabilidade dos resultados. Os experimentos realizados corroboram que, para imagens uniformes e livres de ruídos expressivos, esses extratores tradicionais conseguem atingir desempenho satisfatório. Por outro lado, em cenários mais desafiadores, caracterizados por maior heterogeneidade ou complexidade visual, os resultados evidenciam a necessidade de explorar abordagens alternativas. Nesse contexto, técnicas baseadas em Redes Neurais Convolucionais (CNNs) emergem como uma solução promissora, dado seu maior potencial de robustez frente a variações nas imagens e sua capacidade de generalização em diferentes condições.
+Historicamente, métodos de extração de características, como os analisados neste estudo, foram amplamente empregados 
+em tarefas de busca por similaridade de imagens. Apesar disso, sua eficácia mostrou-se limitada em situações nas quais
+as imagens sofrem transformações ou distorções, comprometendo a confiabilidade dos resultados. Os experimentos realizados
+corroboram que, para imagens uniformes e livres de ruídos expressivos, esses extratores tradicionais conseguem atingir
+desempenho satisfatório. Por outro lado, em cenários mais desafiadores, caracterizados por maior heterogeneidade ou 
+complexidade visual, os resultados evidenciam a necessidade de explorar abordagens alternativas. Nesse contexto, 
+técnicas baseadas em Redes Neurais Convolucionais (CNNs) emergem como uma solução promissora, dado seu maior potencial 
+de robustez frente a variações nas imagens e sua capacidade de generalização em diferentes condições.
 
-Portanto, os extratores avaliados demonstram aplicabilidade em domínios específicos, como a detecção de defeitos em superfícies ou a análise de imagens com padrões visuais consistentes. No entanto, sua utilização em contextos mais amplos e diversificados exige ponderação, sendo recomendável a integração de métodos avançados, como os baseados em aprendizado profundo, para superar as limitações observadas e aprimorar a precisão em tarefas de busca por similaridade.
+Portanto, os extratores avaliados demonstram aplicabilidade em domínios específicos, como a detecção de defeitos em 
+superfícies ou a análise de imagens com padrões visuais consistentes. No entanto, sua utilização em contextos mais amplos 
+e diversificados exige ponderação, sendo recomendável a integração de métodos avançados, como os baseados em aprendizado 
+profundo, para superar as limitações observadas e aprimorar a precisão em tarefas de busca por similaridade.
